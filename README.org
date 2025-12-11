@@ -1,7 +1,7 @@
 * Aprendiendo a usar Emacs y el Org-Mode
 El objeto de este repositorio de GitHub es aprender a usar Emacs y Org-mode desde mediante la práctica y el uso de webs y documentos de referencia.
 ** Recursos de interés
-- [[www.gnu.org][GNU Project Web Site]]
+- [[https://www.gnu.org/][GNU Project Web Site]]
 - [[https://traficantes.net/sites/default/files/pdfs/orgguide.es_.pdf][La Guía compacta de Org-mode]]
 - [[https://orgmode.org/worg/org-tutorials/orgtutorial_dto-es.html][David O'Toole Org tutorial (Spanish Translation)]]
 - [[https://orgmode.org/org.html][The Org Manual]]

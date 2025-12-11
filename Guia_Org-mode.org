@@ -1,8 +1,14 @@
 #+TITLE: La Guia compacta de Org-mode
 #+AUTHOR: José Gaspar Sánchez García
+
 #+OPTIONS: toc:3
 
 * La Guia compacta de Org-mode
+[[https://orgmode.org/resources/img/org-mode-unicorn.svg][Logo Org-mode]]
+
+[[file:org-mode-unicorn.svg][Logotipo Org-mode]]
+
+
 ** 1. Introducción
 ** 2. Estructura del documento
 *** 2.1. Outlines
@@ -34,6 +40,6 @@ Actores importantes de la historia del cine:
    
 
 * Footnotes
-[fn:2]Vea la variable org-special-crtl-a/e para configurar el comportamiento /C-a/ y /C-e/ de los títulos. 
+[fn:2]Vea la variable *~org-special-crtl-a/e~* para configurar el comportamiento /C-a/ y /C-e/ de los títulos. 
 
 [fn:1]Headlines o cabeceras hacen referencia a los títulos y subtítulos. 

@@ -11,19 +11,15 @@
 *** Outlines
 *** Cabeceras
 Las cabeceras[fn:1] definen la estructura de del árbol de sangrado (items de contenido). Los títulos y subtítulos en Org comienzan por uno o más asteríscos en el margen izquierdo[fn:2]. Por ejemplo:
-
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC
 * Cabecera de nivel superior
 ** Segundo nivel
 *** Tercer nivel
 cualquier texto
-
 *** Tercer nivel
 más texto
-
 * Otro título de nivel superior
-#+END_EXAMPLE
-
+#+END_SRC
 *** Listas planas
 Mis películas favoritas:
 1. El Señor de los Anillos
@@ -46,7 +42,7 @@ Creación de una tabla con los datos de una persona:
 | Ana    | 987654321 |   25 |
 | María  | 699888777 |   40 |
 
-*** 3.1. Hojas de cálculo
+*** Hojas de cálculo
 Para saber más:
 - [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Org as a spreadsheet system: a short introduction.]]
 - [[https://easyorgmode.com/docs/org-spreadsheets][Org Spreadsheets]].

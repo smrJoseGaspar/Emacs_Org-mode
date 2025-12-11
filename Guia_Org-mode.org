@@ -24,7 +24,7 @@ cualquier texto
 *** Tercer nivel
 más texto
 
-¡* Otro título de nivel superior
+* Otro título de nivel superior
 #+END_EXAMPLE
 
 *** 2.3. Listas planas
@@ -48,6 +48,55 @@ Creación de una tabla con los datos de una persona:
 | Pedro  | 123456789 |   17 |
 | Ana    | 987654321 |   25 |
 | María  | 699888777 |   40 |
+
+*** 3.1. Hojas de cálculo
+Para saber más:
+- [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Org as a spreadsheet system: a short introduction.]]
+- [[https://easyorgmode.com/docs/org-spreadsheets][Org Spreadsheets]].
+
+**** 3.1.1. Utilizando referencias
+El objetivo es calcular la nota media de los estudiantes a partir de una tabla:
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media       |
+|------------+---------------+---------------+---------------+-------------|
+| Antonio    |            10 |            10 |            10 | /E2 o @2$5/ |
+| Marcos     |             6 |             5 |            10 |             |
+| Andrés     |             4 |             4 |             4 |             |
+| Carla      |             4 |            10 |            10 |             |
+
+Antes de poder insertar una fórmula en [Formula]. Necesitas saber cómo referirse a una fila, una columna o un solo campo. La forma más fácil de aprender sobre las referencias es escribir ~C-c ?~ mientras tú están en un campo.
+
+**** 3.1.2. Mi primera formula
+Vamos a introducir una formula en la tabla para que pueda calcular la media:
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media           |
+|------------+---------------+---------------+---------------+-----------------|
+| Antonio    |            10 |            10 |            10 | :=vmean($2..$4) |
+| Marcos     |             6 |             5 |            10 |                 |
+| Andrés     |             4 |             4 |             4 |                 |
+| Carla      |             4 |            10 |            10 |                 |
+
+
+Presionamos ~C-c C-c~ sobre la formula para proceder a su cálculo:
+
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media |
+|------------+---------------+---------------+---------------+-------|
+| Antonio    |            10 |            10 |            10 |    10 |
+| Marcos     |             6 |             5 |            10 |     7 |
+| Andrés     |             4 |             4 |             4 |     4 |
+| Carla      |             4 |            10 |            10 |     8 |
+#+TBLFM: $5=vmean($2..$4)
+
+Finalmente, podemos añadir una fila con las medias de clase por evaluación:
+
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media |
+|------------+---------------+---------------+---------------+-------|
+| Antonio    |            10 |            10 |            10 |    10 |
+| Marcos     |             6 |             5 |            10 |     7 |
+| Andrés     |             4 |             4 |             4 |     4 |
+| Carla      |             4 |            10 |            10 |     8 |
+|------------+---------------+---------------+---------------+-------|
+| MEDIAS:    |             6 |          7.25 |           8.5 |  7.25 |
+#+TBLFM: $5=vmean($2..$4)::@6$2=vmean(@2..@5)::@6$3=vmean(@2..@5)::@6$4=vmean(@2..@5)
+
 
 
 * Footnotes

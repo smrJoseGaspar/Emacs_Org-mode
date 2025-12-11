@@ -4,15 +4,12 @@
 #+OPTIONS: toc:3
 
 * La Guia compacta de Org-mode
-[[https://orgmode.org/resources/img/org-mode-unicorn.svg][Logo Org-mode]]
+[[./org-mode-unicorn.svg]]
 
-[[file:org-mode-unicorn.svg][Logotipo Org-mode]]
-
-
-** 1. Introducción
-** 2. Estructura del documento
-*** 2.1. Outlines
-*** 2.2. Cabeceras
+** Introducción
+** Estructura del documento
+*** Outlines
+*** Cabeceras
 Las cabeceras[fn:1] definen la estructura de del árbol de sangrado (items de contenido). Los títulos y subtítulos en Org comienzan por uno o más asteríscos en el margen izquierdo[fn:2]. Por ejemplo:
 
 #+BEGIN_EXAMPLE
@@ -27,7 +24,7 @@ más texto
 * Otro título de nivel superior
 #+END_EXAMPLE
 
-*** 2.3. Listas planas
+*** Listas planas
 Mis películas favoritas:
 1. El Señor de los Anillos
 2. Misión imposible.
@@ -39,7 +36,7 @@ Actores importantes de la historia del cine:
 - Elijah Wood :: En el papel de Frodo.
 - Sean Austin :: En el papel de Sam, el amigo de Frodo.
 
-** 3. Tablas
+** Tablas
 Creación de una tabla con los datos de una persona:
 #+CAPTION: Tabla de teléfonos y edades.
 #+LABEL: tbl: phones & ages
@@ -54,7 +51,7 @@ Para saber más:
 - [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Org as a spreadsheet system: a short introduction.]]
 - [[https://easyorgmode.com/docs/org-spreadsheets][Org Spreadsheets]].
 
-**** 3.1.1. Utilizando referencias
+**** Utilizando referencias
 El objetivo es calcular la nota media de los estudiantes a partir de una tabla:
 | Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media       |
 |------------+---------------+---------------+---------------+-------------|
@@ -65,7 +62,7 @@ El objetivo es calcular la nota media de los estudiantes a partir de una tabla:
 
 Antes de poder insertar una fórmula en [Formula]. Necesitas saber cómo referirse a una fila, una columna o un solo campo. La forma más fácil de aprender sobre las referencias es escribir ~C-c ?~ mientras tú están en un campo.
 
-**** 3.1.2. Mi primera formula
+**** Mi primera formula
 Vamos a introducir una formula en la tabla para que pueda calcular la media:
 | Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media           |
 |------------+---------------+---------------+---------------+-----------------|

@@ -1,0 +1,39 @@
+#+TITLE: La Guia compacta de Org-mode
+#+AUTHOR: José Gaspar Sánchez García
+#+OPTIONS: toc:3
+
+* La Guia compacta de Org-mode
+** 1. Introducción
+** 2. Estructura del documento
+*** 2.1. Outlines
+*** 2.2. Cabeceras
+Las cabeceras[fn:1] definen la estructura de del árbol de sangrado (items de contenido). Los títulos y subtítulos en Org comienzan por uno o más asteríscos en el margen izquierdo[fn:2]. Por ejemplo:
+
+#+BEGIN_EXAMPLE
+'* Cabecera de nivel superior
+'** Segundo nivel
+'*** Tercer nivel
+cualquier texto
+'*** Tercer nivel
+más texto
+
+¡* Otro título de nivel superior
+#+END_EXAMPLE
+
+*** 2.3. Listas planas
+Mis películas favoritas:
+1. El Señor de los Anillos
+2. Misión imposible.
+3. Sueño de una noche de Verano.
+   + Los veranos son muy calurosos.
+   + Esta noche hace bastante frio.
+
+Actores importantes de la historia del cine:
+- Elijah Wood :: En el papel de Frodo.
+- Sean Austin :: En el papel de Sam, el amigo de Frodo.
+   
+
+* Footnotes
+[fn:2]Vea la variable org-special-crtl-a/e para configurar el comportamiento /C-a/ y /C-e/ de los títulos. 
+
+[fn:1]Headlines o cabeceras hacen referencia a los títulos y subtítulos. 

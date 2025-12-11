@@ -37,7 +37,17 @@ Mis películas favoritas:
 Actores importantes de la historia del cine:
 - Elijah Wood :: En el papel de Frodo.
 - Sean Austin :: En el papel de Sam, el amigo de Frodo.
-   
+
+** 3. Tablas
+Creación de una tabla con los datos de una persona:
+#+CAPTION: Tabla de teléfonos y edades.
+#+LABEL: tbl: phones & ages
+| Nombre |  Telefono | Edad |
+|--------+-----------+------|
+| Pedro  | 123456789 |   17 |
+| Ana    | 987654321 |   25 |
+| María  | 699888777 |   40 |
+
 
 * Footnotes
 [fn:2]Vea la variable *~org-special-crtl-a/e~* para configurar el comportamiento /C-a/ y /C-e/ de los títulos. 

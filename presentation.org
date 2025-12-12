@@ -1,0 +1,61 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: Ejemplo de presentación con Beamer
+#+date: <2025-12-12 vie>
+#+author: José Gaspar Sanchez Garcia
+#+email: jg.sanchezgarcia@edu.gva.es
+#+language: es
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 27.1 (Org mode 9.3)
+
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [bigger]
+#+OPTIONS: H:2
+
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+
+
+* Introducción
+** Una diapositiva sencilla
+Esta diapositiva consiste en un texto con una lista:
+- El primer elemento y más @importante@!
+- El punto anterior cuenta con una marca especial que es traducida por Beamer como una /alerta/.
+La lista anterior podría ser numerada o cualquier otro tipo de lista, que podría incluir sublistas.
+
+** Una diapositiva más compleja
+La siguiente diapositiva es un poco más compleja al incluir elementos Beamer.
+El siguiente texto con su cabecera es mostrado en un bloque.
+*** Org-mode incrementa tu productividad.                         :B_theorem:
+    ::PROPERTIES::
+    ::BEAMER_env:: theorem
+    ::END::
+- Con Org-mode no tienes que recordar los comandos LaTeX.
+- Está basado en texto ASCII y es extremadamente portable.
+- Emacs!
+
+\hfill \(\qed\)
+
+** Two columns
+
+*** A block                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.4
+    :END:
+    - this slide consists of two columns
+    - the first (left) column has no heading and consists of text
+    - the second (right) column has an image and is enclosed in an
+      *example* block
+
+*** A screenshot                                            :BMCOL:B_example:
+    :PROPERTIES:
+    :BEAMER_col: 0.6
+    :BEAMER_env: example
+    :END:
+#+ATTR_LaTeX: :width \textwidth
+[[file:org-mode-unicorn.svg]]
+

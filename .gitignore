@@ -1,2 +1,7 @@
 # Evita que se gestionen las copias de seguridad de emacs
 *~
+# Vamos a evitar que se suban al repositorio los documentos exportados.
+*.tex
+*.htm
+*.html
+*.pdf

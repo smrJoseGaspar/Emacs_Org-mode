@@ -44,6 +44,16 @@
   (completion-category-overrides '((file (styles partial-completion))))
   (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
 
+;; Markdown preview en Emacs (Emacs 30.2)
+(use-package markdown-mode
+  :ensure t
+  :mode (("\\.md\\'" . markdown-mode)))
+
+(use-package markdown-preview-mode
+  :ensure t
+  :after markdown-mode
+  :commands markdown-preview-mode)
+
 
 
 

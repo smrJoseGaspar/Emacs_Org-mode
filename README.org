@@ -46,42 +46,216 @@ Se permite la copia, distribución y/o modificación de este documento bajo lo
 15. Miscelánea
 
 
-* TODO 1. Introducción
+* TODO 1. Introducción [75%]
 
-* TODO 2. Estructura del documento
+** DONE 1.1 Prefacio
+- State "DONE"       from "TODO"       [2026-07-11 sáb 02:46]
+*Org* es un modo para guardar notas, manteniendo listas TODO, y haciendo planificación de proyectos con un rápido y efectivo sistema de texto plano. Es también un sistema de publicación y autorı́a, y soporta trabajar con código fuente para programación literal e investigación reproducible.
+Este documento es un resumen derivado del [[https://orgmode.org/index.html#sec-4-1][*manual completo de Org-mode*]]. Contiene todas las funcionalidades básicas y comandos, junto con importantes detalles de personalización.
 
-* TODO 3. Tablas
+** DONE 1.2 Instalación
+*Importante:* Si se usa una versión de Org que es parte de una distribución de Emacs o un paquete de XEmacs, por favor sáltese esta sección y vaya directamente a [[id:activacion][*Sección 1.3 Activación*]].
+Si se ha descargado Org de la web, como distribución de ficheros bien **.zip**, o bien **.tar**, o como un archivo Git, es preferible ejecutarlo directamente desde el directorio de la distribución. Necesitará añadir los subdirectorios ‘lisp' al camino de carga de Emacs.
+Para hacer esto, añada la siguiente lı́nea al archivo **.emacs**:
+#+BEGIN_SRC lisp
+(setq load-path (cons “~/path/to/orgdir/lisp” load-path))
+(setq load-path (cons “~/path/to/orgdir/contrib/lisp” load-path))
+#+END_SRC
 
-* TODO 4. Hiperenlaces
+** DONE 1.3 Activación
+:PROPERTIES:
+:ID: activacion
+:END:
+
+Añada las siguientes lı́neas a su archivo **.emacs**. Las últimas cuatro lı́neas definen las claves global de algunos comandos ---por favor, elija claves apropiadas por sı́ mismo.
+#+BEGIN_SRC lisp
+;; Las siguiente lı́neas son siempre necesarias. Elige
+;; tus propias claves
+(global-set-key “\C-cl” 'org-store-link)
+(global-set-key “\C-ca” 'org-agenda)
+(global-set-key “\C-cc” 'org-capture)
+(global-set-key “\C-cb” 'org-iswitchb)
+#+END_SRC
+
+Los ficheros con extensión **.org** llevarán el modo Org automáticamente.
+
+
+* TODO 2. Estructura del documento [50%]
+Org está basado en el modo Outline y suministra comandos flexibles para editar la estructura de un documento.
+
+** DONE 2.1 Outlines
+Org está implementado aprovechando el /modo outline/. Los ı́tems de contenido (outlines) permiten a un documento organizarse en una estructura jerárquica, lo cual (al menos para mı́) es la mejor forma para representar notas y pensamientos. Una visión preliminar de esta estructura se logra al encoger (ocultar) grandes partes del documento y mostrar sólo la estructura general del documento y las partes en las que se está trabajando. Org simplifica enormemente el uso de outlines para comprender la funcionalidad completa de mostrar/ocultar en un simple comando, *org-cycle*, el cual está asignado a la tecla TAB.
+
+** DONE 2.2 Cabeceras
+
+Las cabeceras[fn:3] definen la estructura del árbol de sangrado (ı́tems de contenido). Los tı́tulos y subtı́tulos en Org comienzan con uno o más asteriscos, en el margen izquierdo[fn:4]. Por ejemplo:
+\* Cabecera de nivel superior
+​** Segundo nivel
+​*** Tercer nivel
+cualquier texto
+​*** Tercer nivel
+más texto
+​* Otro tı́tulo de nivel superior
+
+** DONE 2.3 Visibilidad cı́clica
+Los outlines hacen posible ocultar partes del texto en el buffer. Org usa solo dos comandos, asignados a TAB y S-TAB, para cambiar la visibilidad en el buffer.
+- TAB, Subárbol cı́clico: Rotación en el subárbol entre los estados.
+,-> ENCOGIDO -> HIJO -> SUBÁRBOL --.
+‘------------------------------------’
+Cuando es llamado con el argumento prefijo (C-u TAB) o con la tecla de desplazamiento (Shift), es invocado el ciclo global.
+
+- S-TAB y C-u TAB, Ciclo global : Rotar el buffer entero entre los estados del documento.
+,-> RESUMEN -> CONTENIDO -> MOSTRAR TODO --.
+‘-----------------------------------------’
+
+- C-u C-u C-u TAB, Mostrar todo, incluidos los calzoncillos
+Cuando Emacs abre por primera vez un archivo Org, pone el estado global a RESUMEN (OVERVIEW) p.e. sólo las cabeceras de nivel superior son visibles. Esto puede configurarse a través de la variable org-startup-folded, o vı́a fichero añadiendo una palabra reservada /overview, content, showall/, como esta:
+​#+STARTUP: content
+
+** DONE 2.4 Movimiento
+El siguiente comando salta a la siguiente cabecera en el buffer.
++ C-c C-n : Siguiente cabecera.
++ C-c C-p : Cabecera previa.
++ C-c C-f : Siguiente cabecera del mismo nivel.
++ C-c C-b : Cabecera previa del mismo nivel.
++ C-c C-u : Retroceder a la cabecera de nivel superior.
+
+** TODO 2.5 Edición de estructura
+- M-RET : Inserta una nueva cabecera al mismo nivel que la actual. Si el cursor está en un ı́tem de una lista plana, un nuevo ı́tem es creado (see Section 2.7 [Listas planas], page 4). Cuando este comando es usado en medio de una lı́nea, la lı́nea es partida y el resto de la lı́nea será una nueva cabecera[fn:5].
+- M-S-RET : Inserta una nueva entrada TODO con el mismo nivel de la cabecera actual.
+- TAB en nueva, entrada vacia. En una nueva entrada sin texto aún, TAB rotará cı́clicamente a través de niveles similares.
+- M-LEFT/RIGHT : Promociona/devalua la cabecera actual en un nivel.
+- M-S-LEFT/RIGHT : Promociona/devalua el subarbol actual en un nivel.
+- M-S-UP/DOWN : Mueve el subarbol arriba/abajo (intercambia entre anterior/siguiente subarbol del mismo nivel).
+- C-c C-w : Mueve la entrada o región en una lozalización diferente. See Section 9.2 [Rellenar y copiar], page 23.
+- C-x n s/w Limitar la memoria intermedia al árbol actual / ocultándolo
+- Cuando esto es en una región activa (Transient Mark mode), promueve y devalua todas las cabeceras en la región.
+
+** TODO 2.6 Árboles poco densos
+Una importante caracterı́stica de Org-mode es su posibilidad para construir árboles poco
+densos para la información seleccionada en un arbol de outline, ası́ que el documento entero es manejado como es posible, pero la información seleccionada es hecha visible con la
+estructura de cabaceras de encima4 . Inténtelo ahora y verá inmediatamente como funciona.
+Org-mode contiene varios comandos para crear árboles, todos estos comandos pueden
+ser accedidos a través del despachador:
+C-c /
+
+Este prompt es una clave especial para seleccionar un comando de creación de
+un árbol poco denso.
+
+C-c / r
+
+Ocurrencia. Prompt para una expresión regular y muestra un árbol poco denso
+con todas sus coincidencias. Cada coincidencia será sobresaltada; El sobresaltado desaparecerá presionando C-c C-c.
+
+Otros comandos de árbol poco denso seleccionan las cabeceras basadas en la palabra
+reservada TODO, etiquetas o propiedades y serán discutidos posteriormente en este manual.
+
+** TODO 2.7 Listas planas
+Sin una entrada en el árbol de outlines, listas formateadas a mano pueden suministrar una
+estructura adicional. Ello también proporciona una forma de crear listas de cajas de chequeo
+(see Section 5.6 [Cajas de chequeo], page 12). Org soporta la edición de tales listas, y el
+conversor HTML (see Chapter 12 [Exportando], page 34) los analiza y formatea.
+Org permite listas ordenadas, desordenadas y describirlas.
+• Desordenada los items de la lista comienzan con ‘-', ‘+' o ‘*' como marcas.
+• Ordenada los ı́tems de la lista comienzan con ‘1.' o ‘1)'.
+• Descripción la lista usa ‘ :: ' para separar el término de la descripción.
+Los ı́tems subsiguientes de la misma lista deben tener el mismo sangrado en la primera
+lı́nea. Un ı́tem que termine antes de la siguiente lı́nea será sangrado como bola/número,
+o no. Una lista termina cuando todos los ı́tems están cerrados, o antes de dos lı́neas en
+blanco. Un ejemplo:
+​** El Se~
+nor de los Anillos
+Mis escenas favoritas son (en este orden) 1. El ataque de Rohirrim 2. Combate de Eowyn con el rey
++ Esta es también mi escena favorita en el libro
++ Es realmente como Miranda Otto.
+Actores importantes es esta pelı́cula: - Elijah Wood :: En el papel de Frodo - Sean Austin :: En el papel de Sam, amigo de Frodo.
+
+Los siguientes comandos actúan en ı́tems cuando el cursor está en la primera lı́mea de
+un ı́tem (la lı́nea con la bola o el número).
+TAB
+
+
+Los ı́tems pueden ser manejados como cabeceras de niveles.
+
+Vea además las variables org-show-hierarchy-above, org-show-following-heading, org-showsiblings y org-show-entry-below para controlar los detalles de cómo el contexto se muestra en cada
+coincidencia.
+
+
+
+
+
+M-RET
+
+Inserta un nuevo ı́tem al nivel actual. Con el argumento de prefijo, fuerza a
+una nueva cabecera (see Section 2.5 [Edición de estructura], page 3).
+
+M-S-RET
+
+Inserta un nuevo ı́tem con una caja de chequeo (see Section 5.6 [Cajas de
+chequeo], page 12).
+
+M-S-UP/DOWN
+Mueve el ı́tem incluyendo los subitems arriba/abajo (intercambia con el ı́tem
+previo/siguiente del mismo sangrado. Si la lista es ordenada, la renumeración
+es automática.
+M-LEFT/M-RIGHT
+Decrementa/incrementa el sangrado del ı́tem, dejando los hijos sueltos.
+M-S-LEFT/RIGHT
+Decrementa/incrementa el sangrado del ı́tem. incluyendo los subı́tems.
+C-c C-c
+
+Si es una caja de chequeo (see Section 5.6 [Cajas de chequeo], page 12) en una
+lı́nea ı́tem, cambia el estado de la caja de chequeo. Además verifica las bolas y
+el sangrado consistente en la lista completa.
+
+C-c -
+
+Rota la lista entera a través de diferentes bolas de numeración/marcado (‘-',
+‘+', ‘*', ‘1.', ‘1)').
+
+** TODO 2.8 Notas al pie
+Una Nota al pie es definida como un párrafo que comienza con una nota al pie marcada
+entre corchetes en la columna 0, sin ningún sangrado. La referencia a la nota al pie es
+simplemente una marcha de corchetes, texto incluido. Por ejemplo:
+La página web de Org[fn:1] ahora parece un poco mejor que cuando la
+usaba.
+...
+[fn:1] El enlace es: http://orgmode.org
+
+The following commands handle footnotes:
+C-c C-x f El comando de acción de Nota al pie. Cuando el cursor está en una referencia
+a un nota al pie, salta a su definición. Cuando está en la definición, salta a
+la (primera) referencia. En otro caso, crea una nueva nota al pie. Cuando
+este comando es llamado con un arguimento como prefijo, aparecerá un menú
+adicional incluyendo opciones de renumeración.
+C-c C-c
+
+Salta entre definición y referencia.
+
+** *Lecturas recomendadas:*
+- [[https://orgmode.org/manual/Document-Structure.html#Document-Structure][Capı́tulo 2 del manual de Org-mode]].
+- [[https://sachachua.com/wp/2008/01/outlining-your-notes-with-org/][Tutorial de Sacha Chua]].
+
+
+* TODO 3. Tablas [%]
+
+* TODO 4. Hiperenlaces [%]
 
 * TODO 5. Elementos *TODO* [20%]
 Org mode no requiere listas *TODO* que estén en documentos separados. En vez de eso, los ı́tems *TODO* son parte de ficheros de notas, porque los ı́tems *TODO* normalmente llegan mientras se toman notas. Con /Org-mode/, simplemente marca cualquier entrada en un árbol siendo un ı́tem *TODO*. De este modo, la información no está duplicada, y los ı́tems *TODO* permanecen en el contexto que emergı́an.
 Org mode provee métodos para darte un visión de todas las cosas que tienes que haces, recoge desde muchos ficheros.
 ** TODO 5.1 Usando los estados *TODO* [%]
-Cualquier tı́tulo o subtı́tulo puede llegar a ser un ı́tem TODO cuando empieza con la palabra ‘TODO', por ejemplo: 
+Cualquier tı́tulo o subtı́tulo puede llegar a ser un ı́tem *TODO* cuando empieza con la palabra ‘TODO', por ejemplo: 
 ​=*** TODO Escribir carta a Santa Fortuna=
 
-Los comandos más importantes para trabajar con entradas TODO son:
-C-c C-t
+Los comandos más importantes para trabajar con entradas *TODO* son:
+- C-c C-t : Rotar el estado *TODO* del ı́tem actual. =(no marcado) -> TODO -> DONE -> (no marcado)\n= La misma rotación puede también ser hecha “de manera remota” desde los buffers de agenda y lı́nea de tiempo con la tecla t (see Section 10.4 [Comandos de la agenda], page 28).
+- S-DERECHA/IZQUIERDA : Seleccionar el siguiente/precedente estado *TODO*, similar a rotar.
+- C-c / t : Ver ı́tems TODO en un árbol poco denso (see Section 2.6 [Árboles poco densos], page 4). Encoge el buffer, pero muestra todos los ı́tems y la jerarquı́a de tı́tulos y subtı́tulos por encima de ellos.
+- C-c a t : Muestra la lista global *TODO*. Esta colección de ı́tems TODO de todos los archivos de la agenda (see Chapter 10 [Vistas de la Agenda], page 25) en un único buffer.
+- S-M-RET : Inserta una nueva entrada *TODO* debajo del ı́tem actual.
 
-Rotar el estado TODO del ı́tem actual
-=(no marcado) -> TODO -> DONE -> (no marcado)\n=
-La misma rotación puede también ser hecha “de manera remota” desde los buffers de agenda y lı́nea de tiempo con la tecla t (see Section 10.4 [Comandos de la agenda], page 28).
-
-S-DERECHA/IZQUIERDA
-Seleccionar el siguiente/precedente estado TODO, similar a rotar.
-C-c / t
-
-Ver ı́tems TODO en un árbol poco denso (see Section 2.6 [Árboles poco densos], page 4). Encoge el buffer, pero muestra todos los ı́tems y la jerarquı́a de tı́tulos y subtı́tulos por encima de ellos.
-
-C-c a t
-
-Muestra la lista global TODO. Esta colección de ı́tems TODO de todos los archivos de la agenda (see Chapter 10 [Vistas de la Agenda], page 25) en un único buffer.
-
-S-M-RET
-
-Inserta una nueva entrada TODO debajo del ı́tem actual.
-Al cambiar el estado de un ı́tem TODO se puede también activar cambios de etiqueta. Ver el docstring de la opción *org-todo-state-tags-triggers* para más detalles.
+Al cambiar el estado de un ı́tem *TODO* se puede también activar cambios de etiqueta. Ver el docstring de la opción *org-todo-state-tags-triggers* para más detalles.
 
 ** DONE 5.2 Flujos de trabajo multi-estado [%]
 - State "DONE"       from "TODO"       [2026-07-11 sáb 01:50]
@@ -133,33 +307,18 @@ Para el registro de estados, /Org-mode/ confı́a en una configuración basada 
 
 definirá las palabras reservadas *TODO* y el acceso a los atajos de teclado, y también solicita que se grabe el momento en el que la entrada se estableció como *DONE*, y que una nota es grabada cuando se cambie a *WAIT* o *CANCELED*. La misma sintaxis funciona también cuando se define **org-todo-keywords**.
 
-#+TODO: TODO(t) | DONE(d!)
 #+TODO: TODO | DONE
 
 ** TODO 5.4 Prioridades [%]
-Si usa Org mode intensamente, puede acabar con suficientes ı́tems TODO que empiece a
-tener sentido priorizarlos. Priorizar puede ser hecho poniendo una marca de prioridad en
-la cabecera de un ı́tem TODO, como esta
+Si usa /Org mode/ intensamente, puede acabar con suficientes ı́tems *TODO* que empiece a tener sentido priorizarlos. Priorizar puede ser hecho poniendo una marca de prioridad en la cabecera de un ı́tem *TODO*, como esta
 ​*** TODO [#A] Escribir carta a Santa Fortuna
 
-Org mode soporta tres prioridades: ‘A', ‘B', ‘C'. ‘A' es la más alta, por defecto será ‘B' si ninguna es dada. Las prioridades marcan diferencia sólo en la agenda.
-C-c ,
-
-Pone una prioridad a la actual cabecera. Presionando ‘A', ‘B' o ‘C' se selecciona
-la prioridad, o SPC para eliminar la marca.
-
-S-UP/DWN
-
-Incremente/decrementa la prioridad de la cabecera actual
+**Org mode** soporta tres prioridades: ‘A', ‘B', ‘C'. ‘A' es la más alta, por defecto será ‘B' si ninguna es dada. Las prioridades marcan diferencia sólo en la agenda.
+- C-c , Pone una prioridad a la actual cabecera. Presionando ‘A', ‘B' o ‘C' se selecciona la prioridad, o SPC para eliminar la marca.
+- S-UP/DWN : Incremente/decrementa la prioridad de la cabecera actual.
 
 ** TODO 5.5 Partiendo tareas en subtareas
-Es a menudo ventajoso dividir grandes tareas en peque~
-nas y manejables subtareas. Puede
-realizar esto creando un árbol de ideas (outlines) bajo un item TODO, el cual detalla las
-subtareas en el árbol. Para poner la vista sobre la fracción de subtareas que están ya
-completadas, inserte un ‘[/]' o ‘[%]' en cualquier lugar de la cabecera. Estas marcas serán
-actualizadas cada vez que el estado TODO de algún hijo cambie, o presionando C-c C-c en
-la marca. Por ejemplo:
+Es a menudo ventajoso dividir grandes tareas en pequeñnas y manejables subtareas. Puede realizar esto creando un árbol de ideas (outlines) bajo un item TODO, el cual detalla las subtareas en el árbol. Para poner la vista sobre la fracción de subtareas que están ya completadas, inserte un ‘[/]' o ‘[%]' en cualquier lugar de la cabecera. Estas marcas serán actualizadas cada vez que el estado TODO de algún hijo cambie, o presionando C-c C-c en la marca. Por ejemplo:
 ​* Organizar Fiesta [33%]
 ​** TODO Llamar a la gente [1/2]
 ​*** TODO Pedro
@@ -228,5 +387,9 @@ Esta es una sección a implementar con un enlace
 - [[https://orgmode.org/org.html][The Org Manual]]
 
 * Footnotes
+
+[fn:5] Si no desea que la lı́nea sea partida, personalice la variable *org-M-RET-may-split-line*. 
+[fn:4] Vea la variable *org-special-crtl-a/e* para configurar el comportamiento de C-a y C-e en los tı́tulos. 
+[fn:3] Nota del Traductor. Headlines es traducido por cabecera y hace referencia a tı́tulos y subtı́tulos. 
 [fn:1] La correspondiente configuración en el buffer es /#+STARTUP: logdone/. 
 [fn:2] La correspondiente configuración en el buffer es:/#+STARTUP: lognotedone/.

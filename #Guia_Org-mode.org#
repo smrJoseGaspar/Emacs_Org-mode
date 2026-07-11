@@ -1,0 +1,98 @@
+#+TITLE: La Guia compacta de Org-mode
+#+AUTHOR: José Gaspar Sánchez García
+
+#+OPTIONS: toc:3
+
+* La Guia compacta de Org-mode
+[[./org-mode-unicorn.svg]]
+
+** Introducción
+** Estructura del documento
+*** Outlines
+*** Cabeceras
+Las cabeceras[fn:1] definen la estructura de del árbol de sangrado (items de contenido). Los títulos y subtítulos en Org comienzan por uno o más asteríscos en el margen izquierdo[fn:2]. Por ejemplo:
+#+BEGIN_SRC
+* Cabecera de nivel superior
+** Segundo nivel
+*** Tercer nivel
+cualquier texto
+*** Tercer nivel
+más texto
+* Otro título de nivel superior
+#+END_SRC
+*** Listas planas
+Mis películas favoritas:
+1. El Señor de los Anillos
+2. Misión imposible.
+3. Sueño de una noche de Verano.
+   + Los veranos son muy calurosos.
+   + Esta noche hace bastante frio.
+
+Actores importantes de la historia del cine:
+- Elijah Wood :: En el papel de Frodo.
+- Sean Austin :: En el papel de Sam, el amigo de Frodo.
+
+** Tablas
+Creación de una tabla con los datos de una persona:
+#+CAPTION: Tabla de teléfonos y edades.
+#+LABEL: tbl: phones & ages
+| Nombre |  Telefono | Edad |
+|--------+-----------+------|
+| Pedro  | 123456789 |   17 |
+| Ana    | 987654321 |   25 |
+| María  | 699888777 |   40 |
+
+*** Hojas de cálculo
+Para saber más:
+- [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Org as a spreadsheet system: a short introduction.]]
+- [[https://easyorgmode.com/docs/org-spreadsheets][Org Spreadsheets]].
+
+**** Utilizando referencias
+El objetivo es calcular la nota media de los estudiantes a partir de una tabla:
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media       |
+|------------+---------------+---------------+---------------+-------------|
+| Antonio    |            10 |            10 |            10 | /E2 o @2$5/ |
+| Marcos     |             6 |             5 |            10 |             |
+| Andrés     |             4 |             4 |             4 |             |
+| Carla      |             4 |            10 |            10 |             |
+
+Antes de poder insertar una fórmula en [Formula]. Necesitas saber cómo referirse a una fila, una columna o un solo campo. La forma más fácil de aprender sobre las referencias es escribir ~C-c ?~ mientras tú están en un campo.
+
+**** Mi primera formula
+Vamos a introducir una formula en la tabla para que pueda calcular la media:
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media           |
+|------------+---------------+---------------+---------------+-----------------|
+| Antonio    |            10 |            10 |            10 | :=vmean($2..$4) |
+| Marcos     |             6 |             5 |            10 |                 |
+| Andrés     |             4 |             4 |             4 |                 |
+| Carla      |             4 |            10 |            10 |                 |
+
+
+Presionamos ~C-c C-c~ sobre la formula para proceder a su cálculo:
+
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media |
+|------------+---------------+---------------+---------------+-------|
+| Antonio    |            10 |            10 |            10 |    10 |
+| Marcos     |             6 |             5 |            10 |     7 |
+| Andrés     |             4 |             4 |             4 |     4 |
+| Carla      |             4 |            10 |            10 |     8 |
+#+TBLFM: $5=vmean($2..$4)
+
+Finalmente, podemos añadir una fila con las medias de clase por evaluación:
+
+| Estudiante | 1ª Evaluación | 2ª Evaluación | 3ª Evaluación | Media |
+|------------+---------------+---------------+---------------+-------|
+| Antonio    |            10 |            10 |            10 |    10 |
+| Marcos     |             6 |             5 |            10 |     7 |
+| Andrés     |             4 |             4 |             4 |     4 |
+| Carla      |             4 |            10 |            10 |     8 |
+|------------+---------------+---------------+---------------+-------|
+| MEDIAS:    |             6 |          7.25 |           8.5 |  7.25 |
+#+TBLFM: $5=vmean($2..$4)::@6$2=vmean(@2..@5)::@6$3=vmean(@2..@5)::@6$4=vmean(@2..@5)
+
+
+
+* Footnotes
+[fn:2]Vea la variable ~org-special-crtl-a/e~ para configurar el comportamiento /C-a/ y /C-e/ de los títulos. 
+
+[fn:1]Headlines o cabeceras hacen referencia a los títulos y subtítulos. 

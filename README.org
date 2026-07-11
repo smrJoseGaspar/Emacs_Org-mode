@@ -17,7 +17,6 @@
 #+keywords: Emacs, Org-mode, presentations, slides.
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/setup/html-theme-bigblow.setup
 #+cite_export:
-#+OPTIONS toc:3
 
 * Aprendiendo a usar Emacs y el Org-Mode
 El objeto de este repositorio de GitHub es aprender a usar Emacs y Org-mode desde mediante la práctica y el uso de webs y documentos de referencia.
@@ -80,7 +79,7 @@ Añada las siguientes lı́neas a su archivo **.emacs**. Las últimas cuatro l�
 
 Los ficheros con extensión **.org** llevarán el modo Org automáticamente.
 
-* TODO 2. Estructura del documento [100%]
+* DONE 2. Estructura del documento [100%]
 Org está basado en el modo Outline y suministra comandos flexibles para editar la estructura de un documento.
 
 ** DONE 2.1 Outlines
@@ -88,13 +87,15 @@ Org está implementado aprovechando el /modo outline/. Los ı́tems de contenid
 
 ** DONE 2.2 Cabeceras
 Las cabeceras[fn:3] definen la estructura del árbol de sangrado (ı́tems de contenido). Los tı́tulos y subtı́tulos en Org comienzan con uno o más asteriscos, en el margen izquierdo[fn:4]. Por ejemplo:
-,* Cabecera de nivel superior
-,** Segundo nivel
-,*** Tercer nivel
-,cualquier texto
-,*** Tercer nivel
-,más texto
-,* Otro título de nivel superior
+#+BEGIN_EXAMPLE
+   ,* Cabecera de nivel superior
+   ,** Segundo nivel
+   ,*** Tercer nivel
+      cualquier texto
+   ,*** Tercer nivel
+      más texto
+   ,* Otro título de nivel superior
+#+END_EXAMPLE
 
 ** DONE 2.3 Visibilidad cı́clica
 Los outlines hacen posible ocultar partes del texto en el buffer. Org usa solo dos comandos, asignados a TAB y S-TAB, para cambiar la visibilidad en el buffer.
@@ -133,6 +134,10 @@ El siguiente comando salta a la siguiente cabecera en el buffer.
    Cuando esto es en una región activa (Transient Mark mode), promueve y devalua todas las cabeceras en la región.
 
 ** DONE 2.6 Árboles poco densos
+:PROPERTIES:
+:ID:       arboles_poco_densos
+:END:
+
 Una importante caracterı́stica de **Org-mode** es su posibilidad para construir árboles poco densos para la información seleccionada en un arbol de outline, ası́ que el documento entero es manejado como es posible, pero la información seleccionada es hecha visible con la estructura de cabaceras de encima[fn:6]. Inténtelo ahora y verá inmediatamente como funciona.
 *Org-mode* contiene varios comandos para crear árboles, todos estos comandos pueden ser accedidos a través del despachador:
  - **C-c /**, Este prompt es una clave especial para seleccionar un comando de creación de un árbol poco denso.
@@ -151,15 +156,18 @@ Org permite listas ordenadas, desordenadas y describirlas.
 + /Descripción/ la lista usa ´:: ' para separar el /término/ de la descripción.
   
 Los ı́tems subsiguientes de la misma lista deben tener el mismo sangrado en la primera lı́nea. Un ı́tem que termine antes de la siguiente lı́nea será sangrado como bola/número, o no. Una lista termina cuando todos los ı́tems están cerrados, o antes de dos lı́neas en blanco. Un ejemplo:
-`*** El Señnor de los Anillos
-Mis escenas favoritas son (en este orden)
- 1. El ataque de Rohirrim
- 2. Combate de Eowyn con el rey
- 3. Esta es también mi escena favorita en el libro
- 4. Es realmente como Miranda Otto.
-Actores importantes es esta pelı́cula:
- - Elijah Wood :: En el papel de Frodo
- - Sean Austin :: En el papel de Sam, amigo de Frodo.
+#+BEGIN_EXAMPLE
+   ,*** El Señnor de los Anillos
+      Mis escenas favoritas son (en este orden)
+         1. El ataque de Rohirrim
+	 2. Combate de Eowyn con el rey
+	 3. Esta es también mi escena favorita en el libro
+	 4. Es realmente como Miranda Otto.
+
+      Actores importantes es esta pelı́cula:
+       - Elijah Wood :: En el papel de Frodo
+       - Sean Austin :: En el papel de Sam, amigo de Frodo.
+#+END_EXAMPLE
 
 Los siguientes comandos actúan en ı́tems cuando el cursor está en la primera lı́mea de un ı́tem (la lı́nea con la bola o el número).
  - **TAB**, Los ı́tems pueden ser manejados como cabeceras de niveles.
@@ -181,7 +189,7 @@ Los siguientes comandos permiten manejar /Notas al pie/:
 - **C-c C-x f**. El comando de acción de /Nota al pie/. Cuando el cursor está en una referencia a un nota al pie, salta a su definición. Cuando está en la definición, salta a la (primera) referencia. En otro caso, crea una nueva nota al pie. Cuando este comando es llamado con un arguimento como prefijo, aparecerá un menú adicional incluyendo opciones de renumeración.
 - **C-c C-c**. Salta entre definición y referencia.
 
-** *Lecturas recomendadas:*
+** *Lecturas recomendadas:*                           :lecturas_recomendadas:
  - [[https://orgmode.org/manual/Document-Structure.html#Document-Structure][Capı́tulo 2 del manual de Org-mode]].
  - [[https://sachachua.com/wp/2008/01/outlining-your-notes-with-org/][Tutorial de Sacha Chua]].
 
@@ -273,32 +281,117 @@ Finalmente, podemos añadir una fila con las medias de clase por evaluación:
  - [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Org as a spreadsheet system: a short introduction.]]
  - [[https://easyorgmode.com/docs/org-spreadsheets][Org Spreadsheets]].
 
-** TODO **Lecturas recomendadas**
+** TODO **Lecturas recomendadas**                     :lecturas_recomendadas:
  - [[https://orgmode.org/manual/Tables.html#Tables][Capı́tulo 3 del manual de Org]].
  - [[https://orgmode.org/worg/org-tutorials/tables.html][Tutorial de tablas de Bastien]].
  - [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Tutorial de hojas de cálculo de Bastien]].
  - [[https://orgmode.org/worg/org-tutorials/org-plot.html][Tutorial de gráficos de Eric]].
 
-  
-* TODO 4. Hiperenlaces [%]
+* DONE 4. Hiperenlaces [100%]
+Al igual que HTML, Org permite enlaces dentro de archivos, enlaces externos a otros archivos, artı́culos de Usenet, correos electrónicos y mucho más.
+** DONE 4.1 Formato de enlace
+:PROPERTIES:
+:ID: formato_enlace
+:END:
 
-* TODO 5. Elementos *TODO* [40%]
+Org reconocerá enlaces de texto tipo URL y los activará como enlaces en los que se puede hacer click. El formato de enlace general, sin embargo, se ve de la siguiente manera:
+   =[[enlace][descripcion]]= o de manera alternativa =[[enlace]]=.
+   
+Una vez que un enlace en el búffer está completo (con todos los corchetes presentes), Org cambiará la vista de tal manera que la ~‘descripción'~ se mostrará en vez de =‘[[enlace] [descripción]]'= y ~‘enlace'~ será mostrado en vez de =‘[[enlace]]'=. Para editar la parte invisible de ~‘enlace'~, use ~C-c C-l~ con el cursor en el enlace.
+
+** DONE 4.2 Enlaces internos
+Si el enlace no parece una URL, puede ser debido a que es un enlace interno en el fichero actual. El caso más importante en un enlace como =‘[[#mi-id-personal]]'= que enlazará a la entrada con la propiedad CUSTOM_ID como =‘[[#mi-id-personal]]'=.
+Enlaces tales como =‘[[Mi Objetivo]]'= o =‘[[Mi Objetivo][Encuentra mi objetivo]]'= conduce a una búsqueda de texto en el fichero actual para el correspondiente objetivo se parezca a =‘<<Mi Objetivo>>'=
+Los enlaces internos serán usados para referenciar su destino, a través de enlaces o números, cuando sea posible.
+
+** DONE 4.3 Enlaces externos
+Org tiene soporte para enlaces a ficheros, sitios web, mensajes de correo electrónico y de News, entradas de bases de datos BBDB y enlaces a conversaciones de IRC y sus logs.
+Enlaces externos son identificadores tipo URL. Estos empiezan con una breve cadena de identificación seguida por dos puntos. Sin espacio después de los dos puntos. Aquı́ se presentan algunos ejemplos:
+
+#+begin_columns :min-width 30 :gap 1
+#+begin_column
+http://www.astro.uva.nl/~dominik
+file:/home/dominik/images/jupiter.jpg
+/home/dominik/images/jupiter.jpg
+file:papers/last.pdf
+file:projects.org
+docview:papers/last.pdf::NNN
+id:B7423F4D-2E8A-471B-8810-C40F074717E9
+news:comp.emacs
+mailto:adent@galaxy.net
+vm:folder
+vm:folder#id
+wl:folder#id
+mhe:folder#id
+rmail:folder#id
+gnus:group#id
+bbdb:R.*Stallman
+irc:/irc.com/#emacs/bob
+info:org:External%20links
+#+end_column
+
+#+begin_column
+en la web
+fichero, ruta absoluta
+lo mismo que arriba
+fichero, ruta relativa
+otro fichero org
+fichero abierto en modo doc-view en la página NNN
+Enlace a un identificador
+Enlace a un grupo de news
+Enlace de Correo
+Enlace a una carpeta de VM
+Enlace a un mensaje de VM
+Enlace a un mensaje de WANDERLUST
+Enlace a un mensaje de MH-E
+Enlace a un mensaje de RMAIL
+Enlace a un mensaje de GNUS
+enlace a una entrada de BBDB (con expresión regular)
+enlace de IRC
+Enlace a un nodo Info(con el espacio en blaco codificado)
+#+end_column
+#+end_columns
+
+Un enlace debe ser encerrado entre corchetes y puede tener un texto descriptivo que será mostrado en vez de la URL ([[id:formato_enlace][**Sección 4.1. Formato de enlace**]]), por ejemplo: [[http://www.gnu.org/software/emacs/][GNU Emacs]].
+Si la descripción es un nombre de fichero o URL que apunta a una imagen, la exportación HTML (ver [[id:html_export][**Sección 12.4. HTML export**]]) introducirá la imagen como un botón al que se puede hacer click. Si no hay descripción y el enlace apunta a una imagen, esta imagen se incrustará dentro del fichero HTML exportado.
+
+** DONE 4.4 Manejando enlaces
+Org provee métodos para crear un enlace con la sintaxis correcta, para insertarlo en un fichero Org, y poder seguir el enlace.
+ - =C-c l=. Almacena un enlace desde la posición actual. Éste es un comando global (debes crear el atajo de teclado por tı́ mismo) el cual puede ser usado en cualquier buffer para crear un enlace. El enlace será almacenado para posteriores inserciones dentro de un buffer Org (ver más abajo).
+ - =C-c C-l=. Inserta un enlace. Esto sugiere un enlace que será insertado dentro del buffer. Se puede escribir un enlace, o usar la teclas del historial ARRIBA y ABAJO para acceder a los enlaces almacenados. También será consultado por la parte de descripción del enlace. Cuando es llamado con el prefijo =C-u=, se usa el autocompletado del nombre del fichero para enlazar a un fichero.
+ - =C-c C-l=. (con el cursor en un enlace existente) Cuando el cursor está en enlace existente, =C-c C-l= permite editar el enlace y las partes de descripción del enlace.
+ - =C-c C-o= o =mouse-1= o =mouse-2=. Abre el enlace en el que está el cursor.
+ - =C-c &=. Salta a una posición grabada. Una posición es grabada por los siguientes comandos de enlaces internos, y por =C-c %=. Usando este comando varias veces se mueve a través de un anillo de posiciones previamente grabadas en una sucesión directa.
+
+** DONE 4.5 Destinos enlazados
+Los enlaces de ficheros pueden contener información adicional para hacer que Emacs salte a una posición particular en el fichero cuando se sigue un enlace. Esto puede ser un número de lı́nea o una opción de búsqueda después de dos puntos dobles.
+Aquı́ está la sintaxis de los diferentes caminos para adjuntar una búsqueda a un enlace de fichero, junto con una explicación:
+#+BEGIN_EXAMPLE
+[[file:~/code/main.c::255]]        ;; Encontrar lı́nea 255
+[[file:~/xx.org::Mi Objetivo]]     ;; Encontrar ‘<<Mi Objetivo>>'
+[[file:~/xx.org::#mi-id-personal]] ;; Encontrar entrada con id personal
+#+END_EXAMPLE
+
+** DONE **Lecturas recomendadas:**                    :lecturas_recomendadas:
+ - [[https://orgmode.org/manual/Hyperlinks.html#Hyperlinks][Capı́tulo 4 del manual]].
+
+* DONE 5. Elementos *TODO* [100%]
 Org mode no requiere listas *TODO* que estén en documentos separados. En vez de eso, los ı́tems *TODO* son parte de ficheros de notas, porque los ı́tems *TODO* normalmente llegan mientras se toman notas. Con /Org-mode/, simplemente marca cualquier entrada en un árbol siendo un ı́tem *TODO*. De este modo, la información no está duplicada, y los ı́tems *TODO* permanecen en el contexto que emergı́an.
 Org mode provee métodos para darte un visión de todas las cosas que tienes que haces, recoge desde muchos ficheros.
-** TODO 5.1 Usando los estados *TODO* [%]
+** DONE 5.1 Usando los estados *TODO*
 Cualquier tı́tulo o subtı́tulo puede llegar a ser un ı́tem *TODO* cuando empieza con la palabra ‘TODO', por ejemplo: 
 ​=*** TODO Escribir carta a Santa Fortuna=
 
 Los comandos más importantes para trabajar con entradas *TODO* son:
-- C-c C-t : Rotar el estado *TODO* del ı́tem actual. =(no marcado) -> TODO -> DONE -> (no marcado)\n= La misma rotación puede también ser hecha “de manera remota” desde los buffers de agenda y lı́nea de tiempo con la tecla t (see Section 10.4 [Comandos de la agenda], page 28).
-- S-DERECHA/IZQUIERDA : Seleccionar el siguiente/precedente estado *TODO*, similar a rotar.
-- C-c / t : Ver ı́tems TODO en un árbol poco denso (see Section 2.6 [Árboles poco densos], page 4). Encoge el buffer, pero muestra todos los ı́tems y la jerarquı́a de tı́tulos y subtı́tulos por encima de ellos.
-- C-c a t : Muestra la lista global *TODO*. Esta colección de ı́tems TODO de todos los archivos de la agenda (see Chapter 10 [Vistas de la Agenda], page 25) en un único buffer.
-- S-M-RET : Inserta una nueva entrada *TODO* debajo del ı́tem actual.
+- =C-c C-t=. Rotar el estado *TODO* del ı́tem actual. =(no marcado) -> TODO -> DONE -> (no marcado)\n= La misma rotación puede también ser hecha “de manera remota” desde los buffers de agenda y lı́nea de tiempo con la tecla t (see Section 10.4 [Comandos de la agenda], page 28).
+- =S-DERECHA/IZQUIERDA=. Seleccionar el siguiente/precedente estado *TODO*, similar a rotar.
+- =C-c / t=. Ver ı́tems TODO en un árbol poco denso (ver [[id:arboles_poco_densos][**Section 2.6. Árboles poco densos**]]). Encoge el buffer, pero muestra todos los ı́tems y la jerarquı́a de tı́tulos y subtı́tulos por encima de ellos.
+- =C-c a t=. Muestra la lista global *TODO*. Esta colección de ı́tems TODO de todos los archivos de la agenda (ver [[id:vistas_agenda][**Sección 10. Vistas de la Agenda**]]) en un único buffer.
+- =S-M-RET=. Inserta una nueva entrada *TODO* debajo del ı́tem actual.
 
 Al cambiar el estado de un ı́tem *TODO* se puede también activar cambios de etiqueta. Ver el docstring de la opción *org-todo-state-tags-triggers* para más detalles.
 
-** DONE 5.2 Flujos de trabajo multi-estado [%]
+** DONE 5.2 Flujos de trabajo multi-estado
 - State "DONE"       from "TODO"       [2026-07-11 sáb 01:50]
 Se pueden usar palabras reservadas *TODO* para indicar diferentes estados secuenciales en el proceso de trabajo:
 #+BEGIN_SRC emacs-lisp
@@ -313,19 +406,21 @@ La barra vertical separa las palabras reservadas *TODO* (estados que necesitan a
 (sequence “REPORT(r)” “BUG(b)” “KNOWNCAUSE(k)” “|” “FIXED(f)”)))
 #+END_SRC
 
-Las palabras reservadas son todas diferentes, esto ayuda a Org mode a guardar la traza de que subsecuencia deberı́a ser usada para una entrada dada. El ejemplo también muestra cómo definir teclas para un rápido acceso a un estado particular, añadiendo una letra entre paréntesis después de cada palabra reservada - se preguntará por la letra después de C-c C-t.
+Las palabras reservadas son todas diferentes, esto ayuda a Org mode a guardar la traza de que subsecuencia deberı́a ser usada para una entrada dada. El ejemplo también muestra cómo definir teclas para un rápido acceso a un estado particular, añadiendo una letra entre paréntesis después de cada palabra reservada - se preguntará por la letra después de =C-c C-t=.
 Para definir palabras reservadas *TODO* que son válidas únicamente en un solo fichero, use el siguiente texto en cualquier lugar del fichero.
-​#+TODO: TODO(t) | DONE(d)
-​#+TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
-​#+TODO: | CANCELED(c)
+#+BEGIN_EXAMPLE
+,#+TODO: TODO(t) | DONE(d)
+,#+TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
+,#+TODO: | CANCELED(c)
+#+END_EXAMPLE
 
-Después de cambiar una de estas lı́neas, use C-c C-c con el cursor todavı́a en la lı́nea para que Org mode reconozca los cambios.
+Después de cambiar una de estas lı́neas, use =C-c C-c= con el cursor todavı́a en la lı́nea para que Org mode reconozca los cambios.
 
-** 5.3 Proceso de acceso [100%]
+** DONE 5.3 Proceso de acceso [100%]
 Org mode puede grabar automáticamente un timestamp y posiblemente una nota cuando se marca un ı́tem *TODO* como *DONE*, ó incluso cada vez que se cambia el estado de un ı́tem *TODO*. Este sistema es altamente configurable; las configuraciones pueden seguir una
 lógica por tecla y pueden afectar a un fichero o incluso a un subárbol. Para más información de cómo fijar fecha y hora de una tarea, lea [[id:estableciendo_tiempo_trabajo][**Sección 8.4. Estableciendo tiempo de trabajo**]].
 
-*** DONE Cerrando ı́tems [%]
+*** DONE Cerrando ı́tems 
 - State "DONE"       from              [2026-07-11 sáb 01:40]
 El registro más básico es guardar /cuando/ un ı́tem *TODO* se finalizó. Esto se logra con[fn:1].
 #+BEGIN_SRC
@@ -338,34 +433,35 @@ Ası́, cada vez que se cambia una entrada desde un estado TODO (no DONE) a cual
 #+END_SRC
 Entonces, se preguntará por la nota, y la nota será almacenada debajo de la entrada con una cabercera /‘Closing Note'/ *(Cerrando Nota).*
 
-*** DONE Trazando los estados *TODO* [%]
+*** DONE Trazando los estados *TODO*
 - State "DONE"       from "TODO"       [2026-07-11 sáb 01:27]
 Se podrı́a querer guardar la traza de cambios de estado *TODO*. Se puede o bien registrar solo una marca de tiempo (timestamp), o bien una nota con una estampa de tiempo para un cambio. Estos registros serán insertados después de la cabecera como una lista de ı́tems. Cuando se toman un montón de notas, se podrı́a querer tener las notas fuera de la vista dentro de un “cajón” (drawer)
 *Lectura recomendada:* [[https://www.gnu.org/software/emacs/manual/html_node/org/Drawers.html#Drawers][Drawers en el Capı́tulo 2 del manual]].
 
 Para el registro de estados, /Org-mode/ confı́a en una configuración basada en palabras reservadas. Esto se logra añnadiendo marcas especiales ‘!' (para una marca de tiempo) y ‘@' (para una nota) entre paréntesis después de cada palabra reservada. Por ejemplo:
-​#+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)
+     ​=#+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)=
 
 definirá las palabras reservadas *TODO* y el acceso a los atajos de teclado, y también solicita que se grabe el momento en el que la entrada se estableció como *DONE*, y que una nota es grabada cuando se cambie a *WAIT* o *CANCELED*. La misma sintaxis funciona también cuando se define **org-todo-keywords**.
 
 #+TODO: TODO | DONE
 
-** TODO 5.4 Prioridades [%]
+** DONE 5.4 Prioridades
 Si usa /Org mode/ intensamente, puede acabar con suficientes ı́tems *TODO* que empiece a tener sentido priorizarlos. Priorizar puede ser hecho poniendo una marca de prioridad en la cabecera de un ı́tem *TODO*, como esta
-​*** TODO [#A] Escribir carta a Santa Fortuna
-
+=*** TODO [#A] Escribir carta a Santa Fortuna= 
 **Org mode** soporta tres prioridades: ‘A', ‘B', ‘C'. ‘A' es la más alta, por defecto será ‘B' si ninguna es dada. Las prioridades marcan diferencia sólo en la agenda.
-- C-c , Pone una prioridad a la actual cabecera. Presionando ‘A', ‘B' o ‘C' se selecciona la prioridad, o SPC para eliminar la marca.
-- S-UP/DWN : Incremente/decrementa la prioridad de la cabecera actual.
+- =C-c ,=. Pone una prioridad a la actual cabecera. Presionando ‘A', ‘B' o ‘C' se selecciona la prioridad, o SPC para eliminar la marca.
+- =S-UP/DWN=.Incremente/decrementa la prioridad de la cabecera actual.
 
-** TODO 5.5 Partiendo tareas en subtareas
-Es a menudo ventajoso dividir grandes tareas en pequeñnas y manejables subtareas. Puede realizar esto creando un árbol de ideas (outlines) bajo un item TODO, el cual detalla las subtareas en el árbol. Para poner la vista sobre la fracción de subtareas que están ya completadas, inserte un ‘[/]' o ‘[%]' en cualquier lugar de la cabecera. Estas marcas serán actualizadas cada vez que el estado TODO de algún hijo cambie, o presionando C-c C-c en la marca. Por ejemplo:
-​* Organizar Fiesta [33%]
-​** TODO Llamar a la gente [1/2]
-​*** TODO Pedro
-​*** DONE Sara
-​** TODO Comprar comida
-​** DONE Hablar con el vecino
+** DONE 5.5 Partiendo tareas en subtareas
+Es a menudo ventajoso dividir grandes tareas en pequeñnas y manejables subtareas. Puede realizar esto creando un árbol de ideas (outlines) bajo un item TODO, el cual detalla las subtareas en el árbol. Para poner la vista sobre la fracción de subtareas que están ya completadas, inserte un ‘[/]' o ‘[%]' en cualquier lugar de la cabecera. Estas marcas serán actualizadas cada vez que el estado TODO de algún hijo cambie, o presionando =C-c C-c= en la marca. Por ejemplo:
+#+BEGIN_EXAMPLE
+,* Organizar Fiesta [50%]
+,** Llamar a la gente [1/2]
+,*** TODO Pedro
+,*** DONE Sara
+,** TODO Comprar comida
+,** DONE Hablar con el vecino
+#+END_EXAMPLE
 
 ** DONE 5.6 Cajas de chequeo
 :PROPERTIES:
@@ -373,22 +469,76 @@ Es a menudo ventajoso dividir grandes tareas en pequeñnas y manejables subtarea
 :END:
 
 Cada ı́tem en una lista plana (ver [[id:listas_planas][**Sección 2.7. Listas planas**]]) puede ser un cuadro de chequeo comenzando con la cadena ‘[ ]'. Los cuadros de chequeo nos están incluidos en la lista *TODO* global, ası́ a menudo es preferible dividir la tarea en un número reducido de pasos. Ver el siguiente ejemplo de una lista de chequeo.
-*** TODO Organizar Fiesta [1/3] 
+#+BEGIN_EXAMPLE
+,*** TODO Organizar Fiesta [1/3] 
 - [-] Llamar a la gente [1/2]
   - [ ] Pedro
   - [X] Sara
 - [X] Comprar comida
 - [ ] pensar qué música escuchar
+#+END_EXAMPLE
 
 Las cajas de chequeo funcionan jerárquicamente, si un item es caja de chequeo y tiene hijos que son cajas de chequeo, marcando las cajas de chequeo hijos se marcará la caja de chequeo del padre para reflejar si ninguno, alguno o todos los hijos están marcados.
 Los siguientes comandos trabajan con *cajas de chequeo (/checkboxes/)*:
 - **C-c C-c**, Cambia el estado de la caja de chequeo o (con prefijo) añade una caja de chequeo.
 - **M-S-RET**, Inserta un nuevo ı́tem con un cuadro de chequeo. Esto funciona solo si el cursor está en un ı́tem de la lista plana (ver [[id:listas_planas][**Sección 2.7. Listas planas**]]). 
 
-** *Lecturas recomendadas:*
+** *Lecturas recomendadas:*                           :lecturas_recomendadas:
 - [[https://orgmode.org/manual/TODO-Items.html#TODO-Items][Capı́tulo 5 del manual]].
 
-* TODO 6. Etiquetas
+* TODO 6. Etiquetas [60%]                                         :etiquetas:
+Una excelante forma de nombrar y contextualizar información interrelacionada es asignar /etiquetas/ a las cabeceras. Org mode tiene un amplio soporte para etiquetas.[fn:7]
+Cada cabecera puede contener una lista de etiquetas; se introducen al final de una cabecera. Las etiquetas son palabras normales conteniendo letras, números, ‘_' y ‘@'. Las etiquetas deben estar precedidas y seguidas por dos puntos, por ejemplo, *‘:trabajo:'*.
+Es posible asignar varias etiquetas, como en ‘:trabajo:urgente:'. Las etiquetas por defecto estarán en negrilla con el mismo color que la cabecera.
+
+** DONE 6.1 Marca de herencia
+Las etiquetas hacen uso de la estructura jerárquica de los árboles de org-mode. Si una cabecera tiene una cierta etiqueta, todas las subcabeceras heredarán la etiqueta también. Por ejemplo, en la lista
+#+BEGIN_EXAMPLE
+,* Encuentro con franceses                                           :trabajo:
+,** Resumen para Carolina                                         :jefa:notas:
+,*** TODO Preparar presentaciones para ella                        :actividad:
+#+END_EXAMPLE
+
+la cabecera final tendrá las etiquetas *‘:trabajo:'*, *‘:jefa:'*, *‘:notas:'* y *‘:actividad:'* incluso aunque la cabecera final no esté explı́citamente marcada con estas etiquetas. Se puede también asignar etiquetas para que todas las entradas en un fichero hereden si estas etiquetas fueron definidas en un hipotético nivel cero alrededor del fichero entero. Usa una lı́nea como esta[fn:8]:
+=#+FILETAGS: :Pedro:Jefe:Secreto:=
+
+** DONE 6.2 Poniendo marcas
+Las etiquetas pueden simplemente ser escritas en un bufer al final de una cabecera. Después de los dos puntos, =M-TAB= autocompleta etiquetas. Hay también un comando para insertar etiquetas:
+ + =C-c C-q=. Introduce nuevas etiquetas para la cabecera actual. Org mode ofrecerá autocompletado o una interfaz especial de una sola tecla para asignar etiquetas, ver más abajo. Después de presionar =RET=, las etiquetas serán insertadas y alineadas para *org-tags-column*. Cuando se llama con el prefijo =C-u=, todas las etiquetas en el buffer actual serán alineadas a esta columna, solo para que las cosas se vean bien.
+ + =C-c C-c=. Cuando el cursor está en una cabecera, hace lo mismo que =C-c C-q=.
+
+Org soporta inserción de etiquetas basado en una lista de etiquetas. Por defecto esta lista es construida dinámicamente, conteniendo todas las etiquetas actualmente usadas en el buffer. También se puede especificar globalmente una lista dura de etiquetas con la variable *org-tag-alist*. Finalmente se puede asignar las etiquetas por defecto para un fichero dado con lı́neas como:
+=#+TAGS: @trabajo(t) @casa(c) @futbol(f) servidor(s) pc(p)=
+​
+Por defecto, Org mode usa las facilidades de compleción del minibuffer para introducir etiquetas. Sin embargo, también implementa otro rápido método de selección de etiquetas llamado /fast tag selection/. Este permite que tu selecciones y dejes de seleccionar etiquetas con solo presionar una sola tecla. Para que esto funcione bien se debe asignar letras únicas para las etiquetas más usadas. Se puede hacer esto de manera global configurando la variable *org-tag-alist* en el fichero *‘.emacs'*. Por ejemplo, se puede encontrar la necesidad de etiquetar muchos ı́tems en diferentes ficheros con =‘:@casa:'=. En este caso se puede hacer algo como:
+#+BEGIN_SRC emacs-lisp
+  (setq org-tag-alist '((“@trabajo” . ?t) (“@casa” . ?c) (“portatil” . ?p)))
+#+END_SRC
+
+** DONE 6.3 Etiquetar grupos                                          :@read:
+En un conjunto de etiquetas mutuamente exclusivas, la primera etiqueta puede ser definida como una etiqueta de grupo. Cuando se busca para una etiqueta de grupo, devolverá las coincidencias para todos los miembros en el grupo. En una vista de agenda, filtrar por una etiqueta de grupo mostrará cabeceras etiquetadas con al menos uno de los miembros del grupo. Esto crea búsquedas y filtros incluso más flexibles.
+Se pueden establecer grupos de etiquetas insertando un punto y coma entre la etiqueta grupo y otras etiquetas, como esta:
+=#+TAGS: { @read : @read_book @read_ebook }=
+#+TAGS: { @read : @read_book @read_ebook }
+
+En este ejemplo, *‘@read'* es una etiqueta grupo para un conjunto de tres etiquetas: *‘@read'*, *‘@read_book'* y *‘@read_ebook'*.
+Puede también usar las palabras clave :grouptags directamente cuando se configure *org-tag-alist*, ver la documentación de esta variable.
+Si quieres ignorar las etiquetas grupo temporalmente, cambia el soporte de etiquetas grupo con *org-toggle-tags-groups*, asociado a =C-c C-x q=. Si quieres deshabilitar etiquetas grupos completamente, configura org-group-tags a *nil*.
+
+** TODO 6.4 Buscando marcas
+Una vez que un sistema de etiquetas ha sido configurado, puede ser usado para recoger información dentro de listas especiales.
+- =C-c \=
+- =C-c / m=. Crear un árbol expandido con todas las cabeceras coincidentes con la etiqueta (tag) buscada. Con el prefijo =C-u=, ignora las cabeceras que no son *TODO*.
+- =C-c a m=. Crea una lista global de marcas coincidentes de todos los archivos de la agenda. Ver [[id:emparejar_marcas_propiedades][**Sección 10.3.3. Emparejar marcas y propiedades**]].
+- =C-c a M=. Crea una lista global de marcas coincidentes de todos los archivos de la agenda. Ver [[id:emparejar_marcas_propiedades][**Sección 10.3.3. Emparejar marcas y propiedades**]]
+
+Estos comandos buscan coincidencias de cadenas que permiten una lógica básica como ‘+jefe+urgente-proyecto1', para encontrar entradas con marcas ‘jefe' y ‘urgente', pero sin ‘proyecto1', o ‘José|Juan' para encontrar ambas entradas, tanto ‘José' como ‘Juan'.
+La sintáxis completa de las cadenas de búsqueda es rica y permite además coincidencias con todas las palabras clave TODO, entradas de nivel y propiedades. Para una completa descripción con muchos ejemplos, vea  [[id:emparejar_marcas_propiedades][**Sección 10.3.3. Emparejar marcas y propiedades**]].
+
+** TODO Lecturas recomendadas                         :lecturas_recomendadas:
++ [[https://orgmode.org/manual/Tags.html#Tags][Capı́tulo 6 del manual]].
++ [[https://sachachua.com/wp/2008/01/tagging-in-org-plus-bonus-code-for-timeclocks-and-tags/][Artı́culo de Sacha Chua acerca de etiquetado en Org-mode]].
+
 
 * TODO 7. Propiedades
 
@@ -415,14 +565,43 @@ Esta es una sección a implementar con un enlace
 :END:
 
 
-* TODO 10. Vistas de la Agenda
+* TODO 10. Vistas de la Agenda [16%]
+:PROPERTIES:
+:ID:       vistas_agenda
+:END:
+** TODO 10.1. Archivos de agenda
+** TODO 10.2. El disparador de la agenda
+** TODO 10.3. Las vistas internas de la agenda [0%]
+*** TODO 10.3.1. Agenda semanal / diaria
+*** TODO 10.3.2. La lista global *TODO*
+*** TODO 10.3.3. Emparejar marcas y propiedades
+:PROPERTIES:
+:ID:       emparejar_marcas_propiedades
+:END:
+**** TODO Emparejar sintaxis
+*** TODO 10.3.4. Línea de tiempo para un simple archivo
+*** TODO 10.3.5. Vista de búsqueda
+** TODO 10.4. Comandos en el buffer de la agenda
+** TODO 10.5. Vistas de agenda personalizadas
+** DONE Lecturas recomendadas                         :lecturas_recomendadas:
+- [[https://orgmode.org/manual/Agenda-Views.html][Capı́tulo 11 del manual]].
+- [[https://orgmode.org/worg/org-tutorials/org-custom-agenda-commands.html][El tutorial de Mat Lundin acerca de comandos personalizados de agenda]].
+
 
 * TODO 11. Marcas para enriquecer la exportación
 
-* TODO 12. Exportando [%]
+* TODO 12. Exportando [0%]
 :PROPERTIES:
 :ID:       exportando
 :END:
+** TODO 12.1. Uno
+** TODO 12.2. Dos 
+** TODO 12.3. Tres
+** TODO 12.4. HTML Export
+:PROPERTIES:
+:ID:       html_export
+:END:
+
 
 
 * TODO 13. Publicación
@@ -439,6 +618,8 @@ Esta es una sección a implementar con un enlace
 - [[https://orgmode.org/org.html][The Org Manual]]
 
 * Footnotes
+[fn:8] Como siempre estas configuraciones de buffer se activan presionando =C-c C-c=. 
+[fn:7]  Nota del Traductor: Tanto label como tag se traduce como etiqueta. En general, label se utiliza más como nombre que se le asigna a algo y /tag/ como palabra clave, si bien ambas suelen traducirse como etiqueta. Ası́, he decidido traducir /implement label/ como nombrar y /tag/ como etiqueta.Una excelante forma de nombrar y contextualizar información interrelacionada es asignar.
 [fn:6] Vea además las variables *org-show-hierarchy-above*, *org-show-following-heading*, *org-showsiblings* y *org-show-entry-below* para controlar los detalles de cómo el contexto se muestra en cada coincidencia. 
 [fn:5] Si no desea que la lı́nea sea partida, personalice la variable *org-M-RET-may-split-line*. 
 [fn:4] Vea la variable *org-special-crtl-a/e* para configurar el comportamiento de C-a y C-e en los tı́tulos. 

@@ -1,7 +1,232 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil expand-links:t f:t
+#+options: inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: GUIA PARA EL USO DE EMACS Y ORG-MODE
+#+date: \today
+#+author: José Gaspar Sánchez Garcia
+#+email: jg.sanchezgarcia@edu.gva.es
+
+#+LICENSE: https://creativecommons.org/licenses/by-sa/4.0/
+#+language: es
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.2 (Org mode 9.7.11)
+#+description: Manual de referencia para el aprendizaje del uso de Emacs y Org-mode
+#+keywords: Emacs, Org-mode, presentations, slides.
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/setup/html-theme-bigblow.setup
+#+cite_export:
+
 * Aprendiendo a usar Emacs y el Org-Mode
 El objeto de este repositorio de GitHub es aprender a usar Emacs y Org-mode desde mediante la práctica y el uso de webs y documentos de referencia.
-** Recursos de interés
+Este documento esta basado en [[https://traficantes.net/sites/default/files/pdfs/orgguide.es_.pdf][*La Guı́a compacta de Org-mode* Versión 7.9.2 (release˙7.9.2-584-g0421be)]], publicada por Carsten Dominik y traducido por David Arroyo Menéndez con contribuciones usuarios de emacs hispanohablantes.
+
+** Licencia:
+Copyright c 2010--2013 Free Software Foundation.
+Se permite la copia, distribución y/o modificación de este documento bajo los términos de la GNU Free Documentation License, Version 1.3 o posteriores versiones publicadas por la Free Software Foundation; sin secciones invariantes, con texto al inicio de la cubierta de portada 'A GNU Manual', y con el texto de contraportada como se muestra abajo (a). Una copia de esta licencia está incluida en la sección titulada 'GNU Free Documentation License” en el manual de Org completo que está distribuido junto con la guı́a compacta.
+(a) El texto de contraportada de la FSF es: “Tu tienes la libertad para copiar y modificar este manual de GNU”.
+
+
+* Índice
+1. Introducción
+2. Estructura del documento
+3. Tablas
+4. Hiperenlaces
+5. Elementos TODO
+6. Etiquetas
+7. Propiedades
+8. Fechas y horas
+9. Capturar - Rellenar - Archivar
+10. Vistas de la Agenda
+11. Marcas para enriquecer la exportación
+12. Exportando
+13. Publicación
+14. Trabajando con código fuente
+15. Miscelánea
+
+
+* TODO 1. Introducción
+
+* TODO 2. Estructura del documento
+
+* TODO 3. Tablas
+
+* TODO 4. Hiperenlaces
+
+* TODO 5. Elementos *TODO* [20%]
+Org mode no requiere listas *TODO* que estén en documentos separados. En vez de eso, los ı́tems *TODO* son parte de ficheros de notas, porque los ı́tems *TODO* normalmente llegan mientras se toman notas. Con /Org-mode/, simplemente marca cualquier entrada en un árbol siendo un ı́tem *TODO*. De este modo, la información no está duplicada, y los ı́tems *TODO* permanecen en el contexto que emergı́an.
+Org mode provee métodos para darte un visión de todas las cosas que tienes que haces, recoge desde muchos ficheros.
+** TODO 5.1 Usando los estados *TODO* [%]
+Cualquier tı́tulo o subtı́tulo puede llegar a ser un ı́tem TODO cuando empieza con la palabra ‘TODO', por ejemplo: 
+​=*** TODO Escribir carta a Santa Fortuna=
+
+Los comandos más importantes para trabajar con entradas TODO son:
+C-c C-t
+
+Rotar el estado TODO del ı́tem actual
+=(no marcado) -> TODO -> DONE -> (no marcado)\n=
+La misma rotación puede también ser hecha “de manera remota” desde los buffers de agenda y lı́nea de tiempo con la tecla t (see Section 10.4 [Comandos de la agenda], page 28).
+
+S-DERECHA/IZQUIERDA
+Seleccionar el siguiente/precedente estado TODO, similar a rotar.
+C-c / t
+
+Ver ı́tems TODO en un árbol poco denso (see Section 2.6 [Árboles poco densos], page 4). Encoge el buffer, pero muestra todos los ı́tems y la jerarquı́a de tı́tulos y subtı́tulos por encima de ellos.
+
+C-c a t
+
+Muestra la lista global TODO. Esta colección de ı́tems TODO de todos los archivos de la agenda (see Chapter 10 [Vistas de la Agenda], page 25) en un único buffer.
+
+S-M-RET
+
+Inserta una nueva entrada TODO debajo del ı́tem actual.
+Al cambiar el estado de un ı́tem TODO se puede también activar cambios de etiqueta. Ver el docstring de la opción *org-todo-state-tags-triggers* para más detalles.
+
+** DONE 5.2 Flujos de trabajo multi-estado [%]
+- State "DONE"       from "TODO"       [2026-07-11 sáb 01:50]
+Se pueden usar palabras reservadas *TODO* para indicar diferentes estados secuenciales en el proceso de trabajo:
+#+BEGIN_SRC lisp
+(setq org-todo-keywords
+'((sequence “TODO” “FEEDBACK” “VERIFY” “|” “DONE” “DELEGATED”)))
+#+END_SRC
+
+La barra vertical separa las palabras reservadas *TODO* (estados que necesitan acción) de los estados *DONE* (realizados, que no necesitan más acción). Si no se proporciona la barra separadora, el último estado es usado como estado DONE. Con esta configuración, el comando C-c C-t rotará una entrada desde TODO a FEEDBACK, después a VERIFY y finalmente a DONE y DELEGATED.
+#+BEGIN_SRC
+(setq org-todo-keywords
+'((sequence “TODO(t)” “|” “DONE(d)”)
+(sequence “REPORT(r)” “BUG(b)” “KNOWNCAUSE(k)” “|” “FIXED(f)”)))
+#+END_SRC
+
+Las palabras reservadas son todas diferentes, esto ayuda a Org mode a guardar la traza de que subsecuencia deberı́a ser usada para una entrada dada. El ejemplo también muestra cómo definir teclas para un rápido acceso a un estado particular, añadiendo una letra entre paréntesis después de cada palabra reservada - se preguntará por la letra después de C-c C-t.
+Para definir palabras reservadas *TODO* que son válidas únicamente en un solo fichero, use el siguiente texto en cualquier lugar del fichero.
+​#+TODO: TODO(t) | DONE(d)
+​#+TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
+​#+TODO: | CANCELED(c)
+
+Después de cambiar una de estas lı́neas, use C-c C-c con el cursor todavı́a en la lı́nea para que Org mode reconozca los cambios.
+
+** 5.3 Proceso de acceso [100%]
+Org mode puede grabar automáticamente un timestamp y posiblemente una nota cuando se marca un ı́tem *TODO* como *DONE*, ó incluso cada vez que se cambia el estado de un ı́tem *TODO*. Este sistema es altamente configurable; las configuraciones pueden seguir una
+lógica por tecla y pueden afectar a un fichero o incluso a un subárbol. Para más información de cómo fijar fecha y hora de una tarea, lea [[id:estableciendo_tiempo_trabajo][**Sección 8.4. Estableciendo tiempo de trabajo**]].
+
+*** DONE Cerrando ı́tems [%]
+- State "DONE"       from              [2026-07-11 sáb 01:40]
+El registro más básico es guardar /cuando/ un ı́tem *TODO* se finalizó. Esto se logra con[fn:1].
+#+BEGIN_SRC
+(setq org-log-done 'time)
+#+END_SRC
+
+Ası́, cada vez que se cambia una entrada desde un estado TODO (no DONE) a cualquiera de los estados DONE, una lı́nea ‘CLOSED: [timestamp]' será insertada justo después de la cabecera. Si quieres grabar una nota con una marca de tiempo (timestamp) usa[fn:2]:
+#+BEGIN_SRC
+(setq org-log-done 'note)
+#+END_SRC
+Entonces, se preguntará por la nota, y la nota será almacenada debajo de la entrada con una cabercera /‘Closing Note'/ *(Cerrando Nota).*
+
+*** DONE Trazando los estados *TODO* [%]
+- State "DONE"       from "TODO"       [2026-07-11 sáb 01:27]
+Se podrı́a querer guardar la traza de cambios de estado *TODO*. Se puede o bien registrar solo una marca de tiempo (timestamp), o bien una nota con una estampa de tiempo para un cambio. Estos registros serán insertados después de la cabecera como una lista de ı́tems. Cuando se toman un montón de notas, se podrı́a querer tener las notas fuera de la vista dentro de un “cajón” (drawer)
+*Lectura recomendada:* [[https://www.gnu.org/software/emacs/manual/html_node/org/Drawers.html#Drawers][Drawers en el Capı́tulo 2 del manual]].
+
+Para el registro de estados, /Org-mode/ confı́a en una configuración basada en palabras reservadas. Esto se logra añnadiendo marcas especiales ‘!' (para una marca de tiempo) y ‘@' (para una nota) entre paréntesis después de cada palabra reservada. Por ejemplo:
+​#+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)
+
+definirá las palabras reservadas *TODO* y el acceso a los atajos de teclado, y también solicita que se grabe el momento en el que la entrada se estableció como *DONE*, y que una nota es grabada cuando se cambie a *WAIT* o *CANCELED*. La misma sintaxis funciona también cuando se define **org-todo-keywords**.
+
+#+TODO: TODO(t) | DONE(d!)
+#+TODO: TODO | DONE
+
+** TODO 5.4 Prioridades [%]
+Si usa Org mode intensamente, puede acabar con suficientes ı́tems TODO que empiece a
+tener sentido priorizarlos. Priorizar puede ser hecho poniendo una marca de prioridad en
+la cabecera de un ı́tem TODO, como esta
+​*** TODO [#A] Escribir carta a Santa Fortuna
+
+Org mode soporta tres prioridades: ‘A', ‘B', ‘C'. ‘A' es la más alta, por defecto será ‘B' si ninguna es dada. Las prioridades marcan diferencia sólo en la agenda.
+C-c ,
+
+Pone una prioridad a la actual cabecera. Presionando ‘A', ‘B' o ‘C' se selecciona
+la prioridad, o SPC para eliminar la marca.
+
+S-UP/DWN
+
+Incremente/decrementa la prioridad de la cabecera actual
+
+** TODO 5.5 Partiendo tareas en subtareas
+Es a menudo ventajoso dividir grandes tareas en peque~
+nas y manejables subtareas. Puede
+realizar esto creando un árbol de ideas (outlines) bajo un item TODO, el cual detalla las
+subtareas en el árbol. Para poner la vista sobre la fracción de subtareas que están ya
+completadas, inserte un ‘[/]' o ‘[%]' en cualquier lugar de la cabecera. Estas marcas serán
+actualizadas cada vez que el estado TODO de algún hijo cambie, o presionando C-c C-c en
+la marca. Por ejemplo:
+​* Organizar Fiesta [33%]
+​** TODO Llamar a la gente [1/2]
+​*** TODO Pedro
+​*** DONE Sara
+​** TODO Comprar comida
+​** DONE Hablar con el vecino
+
+** TODO 5.6 Cajas de chequeo
+Cada ı́tem en una lista plana (see Section 2.7 [Listas planas], page 4) puede ser un cuadro
+de chequeo comenzando con la cadena ‘[ ]'. Los cuadros de chequeo nos están incluidos en
+la lista TODO global, ası́ a menudo es preferible dividir la tarea en un número reducido de
+pasos. Ver el siguiente ejemplo de una lista de chequeo.
+​* TODO Organizar Fiesta [1/3] - [-] Llamar a la gente [1/2] - [ ] Pedro - [X] Sara - [X] Comprar comida - [ ] pensar qué música escuchar
+
+Las cajas de chequeo funcionan jerárquicamente, si un item es caja de chequeo y tiene
+hijos que son cajas de chequeo, marcando las cajas de chequeo hijos se marcará la caja de
+chequeo del padre para reflejar si ninguno, alguno o todos los hijos están marcados.
+Los siguientes comandos trabajan con *cajas de chequeo (/checkboxes/)*:
+- C-c C-c : Cambia el estado de la caja de chequeo o (con prefijo) añade una caja de chequeo.
+- M-S-RET : Inserta un nuevo ı́tem con un cuadro de chequeo. Esto funciona solo si el cursor está en un ı́tem de la lista plana (see Section 2.7 [Listas planas], page 4).
+
+** *Lecturas recomendadas:*
+- Capı́tulo 5 del manual.
+- Tutorial de introducción de David O'Toole.
+- Configuración de GTD de Charles Cave.
+
+
+* TODO 6. Etiquetas
+
+* TODO 7. Propiedades
+
+* TODO 8. Fechas y horas [%]
+
+** TODO 8.1. Uno
+
+** TODO 8.2. Dos
+
+** TODO 8.3. Tres
+
+** TODO 8.4. Estableciendo tiempo de trabajo
+:PROPERTIES:
+:ID:    estableciendo_tiempo_trabajo
+:END:
+
+Esta es una sección a implementar con un enlace
+
+* TODO 9. Capturar - Rellenar - Archivar
+
+* TODO 10. Vistas de la Agenda
+
+* TODO 11. Marcas para enriquecer la exportación
+
+* TODO 12. Exportando
+
+* TODO 13. Publicación
+
+* TODO 14. Trabajando con código fuente
+
+* TODO 15. Miscelánea
+
+
+* Recursos de interés
 - [[https://www.gnu.org/][GNU Project Web Site]]
 - [[https://traficantes.net/sites/default/files/pdfs/orgguide.es_.pdf][La Guía compacta de Org-mode]]
 - [[https://orgmode.org/worg/org-tutorials/orgtutorial_dto-es.html][David O'Toole Org tutorial (Spanish Translation)]]
 - [[https://orgmode.org/org.html][The Org Manual]]
+
+* Footnotes
+[fn:1] La correspondiente configuración en el buffer es /#+STARTUP: logdone/. 
+[fn:2] La correspondiente configuración en el buffer es:/#+STARTUP: lognotedone/.

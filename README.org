@@ -18,32 +18,23 @@
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/setup/html-theme-bigblow.setup
 #+cite_export:
 
-* Aprendiendo a usar Emacs y el Org-Mode
 El objeto de este repositorio de GitHub es aprender a usar Emacs y Org-mode desde mediante la práctica y el uso de webs y documentos de referencia.
 Este documento esta basado en [[https://traficantes.net/sites/default/files/pdfs/orgguide.es_.pdf][*La Guı́a compacta de Org-mode* Versión 7.9.2 (release˙7.9.2-584-g0421be)]], publicada por Carsten Dominik y traducido por David Arroyo Menéndez con contribuciones usuarios de emacs hispanohablantes.
 
-** Licencia:
+*Licencia:*
 Copyright c 2010--2013 Free Software Foundation.
 Se permite la copia, distribución y/o modificación de este documento bajo los términos de la GNU Free Documentation License, Version 1.3 o posteriores versiones publicadas por la Free Software Foundation; sin secciones invariantes, con texto al inicio de la cubierta de portada 'A GNU Manual', y con el texto de contraportada como se muestra abajo (a). Una copia de esta licencia está incluida en la sección titulada 'GNU Free Documentation License” en el manual de Org completo que está distribuido junto con la guı́a compacta.
 (a) El texto de contraportada de la FSF es: “Tu tienes la libertad para copiar y modificar este manual de GNU”.
 
+#+name: fig-cc-by-sa
+#+caption: CC-BY-SA
+#+DOWNLOADED: https://logodix.com/logo/1071921.png @ 2026-07-12 19:30:54
+[[file:images/20260712-193052_1071921.png]]
 
-* Índice
-1. Introducción
-2. Estructura del documento
-3. Tablas
-4. Hiperenlaces
-5. Elementos TODO
-6. Etiquetas
-7. Propiedades
-8. Fechas y horas
-9. Capturar - Rellenar - Archivar
-10. Vistas de la Agenda
-11. Marcas para enriquecer la exportación
-12. Exportando
-13. Publicación
-14. Trabajando con código fuente
-15. Miscelánea
+#+name: fig-GFDL
+#+caption: GFDL: GNU Free Documentation License.
+#+DOWNLOADED: https://www.gnu.org/graphics/gfdl-logo-small.png @ 2026-07-12 19:37:53
+[[file:images/20260712-193753_gfdl-logo-small.png]]
 
 
 * DONE 1. Introducción [100%]

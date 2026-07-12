@@ -99,24 +99,24 @@ Las cabeceras[fn:3] definen la estructura del árbol de sangrado (ı́tems de c
 
 ** DONE 2.3 Visibilidad cı́clica
 Los outlines hacen posible ocultar partes del texto en el buffer. Org usa solo dos comandos, asignados a TAB y S-TAB, para cambiar la visibilidad en el buffer.
- - **TAB**, /Subárbol cı́clico/: Rotación en el subárbol entre los estados.
+ - =TAB=, /Subárbol cı́clico/: Rotación en el subárbol entre los estados.
    ,-> ENCOGIDO -> HIJO -> SUBÁRBOL --.
    ‘------------------------------------’
    Cuando es llamado con el argumento prefijo (C-u TAB) o con la tecla de desplazamiento (Shift), es invocado el ciclo global.
- - **S-TAB** y **C-u TAB**, /Ciclo global/ : Rotar el buffer entero entre los estados del documento.
+ - =S-TAB= y =C-u TAB=, /Ciclo global/.Rotar el buffer entero entre los estados del documento.
    ,-> RESUMEN -> CONTENIDO -> MOSTRAR TODO --.
    ‘-----------------------------------------’
- - **C-u C-u C-u TAB**, Mostrar todo, incluidos los calzoncillos.
+ - =C-u C-u C-u TAB=. Mostrar todo, incluidos los calzoncillos.
    Cuando Emacs abre por primera vez un archivo Org, pone el estado global a RESUMEN (OVERVIEW) p.e. sólo las cabeceras de nivel superior son visibles. Esto puede configurarse a través de la variable **org-startup-folded**, o vı́a fichero añadiendo una palabra reservada /overview, content, showall/, como esta:
    ,#+STARTUP: content
 
 ** DONE 2.4 Movimiento
 El siguiente comando salta a la siguiente cabecera en el buffer.
- + **C-c C-n**, Siguiente cabecera.
- + **C-c C-p**, Cabecera previa.
- + **C-c C-f**, Siguiente cabecera del mismo nivel.
- + **C-c C-b**, Cabecera previa del mismo nivel.
- + **C-c C-u**, Retroceder a la cabecera de nivel superior.
+ + =C-c C-n=. Siguiente cabecera.
+ + =C-c C-p=. Cabecera previa.
+ + =C-c C-f=. Siguiente cabecera del mismo nivel.
+ + =C-c C-b=. Cabecera previa del mismo nivel.
+ + =C-c C-u=. Retroceder a la cabecera de nivel superior.
 
 ** DONE 2.5 Edición de estructura
 :PROPERTIES:

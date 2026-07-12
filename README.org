@@ -278,7 +278,7 @@ Finalmente, podemos añadir una fila con las medias de clase por evaluación:
  - [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Tutorial de hojas de cálculo de Bastien]].
  - [[https://orgmode.org/worg/org-tutorials/org-plot.html][Tutorial de gráficos de Eric]].
 
-* DONE 4. Hiperenlaces [85%]
+* DONE 4. Hiperenlaces [100%]
 Al igual que HTML, Org permite enlaces dentro de archivos, enlaces externos a otros archivos, artı́culos de Usenet, correos electrónicos y mucho más.
 ** DONE 4.1 Formato de enlace
 :PROPERTIES:
@@ -363,7 +363,7 @@ Aquı́ está la sintaxis de los diferentes caminos para adjuntar una búsqued
 [[file:~/xx.org::#mi-id-personal]] ;; Encontrar entrada con id personal
 #+END_EXAMPLE
 
-** TODO 4.6. Imágenes
+** DONE 4.6. Imágenes
 En Org las imágenes se insertan de una forma muy similar a la de los enlaces.
 #+BEGIN_EXAMPLE
 [[./images/org-mode-unicorn.svg]]
@@ -559,7 +559,7 @@ Los siguientes comandos trabajan con *cajas de chequeo (/checkboxes/)*:
 ** *Lecturas recomendadas:*                           :lecturas_recomendadas:
 - [[https://orgmode.org/manual/TODO-Items.html#TODO-Items][Capı́tulo 5 del manual]].
 
-* TODO 6. Etiquetas [60%]                                         :etiquetas:
+* TODO 6. Etiquetas [80%]                                         :etiquetas:
 Una excelante forma de nombrar y contextualizar información interrelacionada es asignar /etiquetas/ a las cabeceras. Org mode tiene un amplio soporte para etiquetas.[fn:7]
 Cada cabecera puede contener una lista de etiquetas; se introducen al final de una cabecera. Las etiquetas son palabras normales conteniendo letras, números, ‘_' y ‘@'. Las etiquetas deben estar precedidas y seguidas por dos puntos, por ejemplo, *‘:trabajo:'*.
 Es posible asignar varias etiquetas, como en ‘:trabajo:urgente:'. Las etiquetas por defecto estarán en negrilla con el mismo color que la cabecera.
@@ -612,7 +612,7 @@ Una vez que un sistema de etiquetas ha sido configurado, puede ser usado para re
 Estos comandos buscan coincidencias de cadenas que permiten una lógica básica como ‘+jefe+urgente-proyecto1', para encontrar entradas con marcas ‘jefe' y ‘urgente', pero sin ‘proyecto1', o ‘José|Juan' para encontrar ambas entradas, tanto ‘José' como ‘Juan'.
 La sintáxis completa de las cadenas de búsqueda es rica y permite además coincidencias con todas las palabras clave TODO, entradas de nivel y propiedades. Para una completa descripción con muchos ejemplos, vea  [[id:emparejar_marcas_propiedades][**Sección 10.3.3. Emparejar marcas y propiedades**]].
 
-** TODO Lecturas recomendadas                         :lecturas_recomendadas:
+** DONE Lecturas recomendadas                         :lecturas_recomendadas:
 + [[https://orgmode.org/manual/Tags.html#Tags][Capı́tulo 6 del manual]].
 + [[https://sachachua.com/wp/2008/01/tagging-in-org-plus-bonus-code-for-timeclocks-and-tags/][Artı́culo de Sacha Chua acerca de etiquetado en Org-mode]].
 
@@ -649,7 +649,7 @@ Para crear árboles expandidos y listas especiales con selección basada en pr
 - [[https://orgmode.org/manual/Properties-and-Columns.html#Properties-and-Columns][Chapı́tulo 7 del manual]].
 - [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][Bastien Guerry's column view tutorial]].
 
-* TODO 8. Fechas y horas [20%]
+* TODO 8. Fechas y horas [40%]
 Para tener una planificación de un proyecto, los ı́tems =TODO= pueden ser etiquetados con una fecha y/o con una hora. La cadena con este formato especial que trae la información de fecha y hora es llamado /timestamp/ en Org mode.
 ** DONE 8.1. Instante en el tiempo [100%]
 Una marca de tiempo (timestamp) es una especificación de una fecha (posiblemente con un tiempo o un rango de tiempos) en un formato especial. Como [2026-07-12 dom] o <2026-07-16 jue> o <2025-12-24 mié> o <2026-07-14 mar 12:30> o ‘<2003-09-16 Jue 12:00-12:30>'.
@@ -690,88 +690,42 @@ Como una marca de tiempo timestamp, pero con paréntesis cuadrados en vez de an
 [2026-06-29 lun]
 #+END_EXAMPLE
 
-** TODO 8.2. Creando instantes de tiempo
-Para que Org mode reconozca marcas de tiempo, necesitan estar en el formato especı́fico.
-Todos los comandos listado debajo producen marcas de tiempo en el formato correcto.
-C-c .
-
-Crea un diálogo para una fecha e inserta la correspondiente marca de tiempo.
-Cuando el cursor está en una marca de tiempo existente en el buffer, el comando
-es usado para modificar esta marca de tiempo en vez de insertar una nueva.
-Cuando este comando es usado dos veces seguidas, un rango de tiempo es
-insertado. Con un prefijo, también a~
-nade la hora actual.
-
-C-c !
-
-Como C-c ., pero inserta una marca de tiempo inactiva que no causará una
-entrada en la agenda.
-
-S-LEFT/RIGHT
-Cambia la fecha en el cursor por un dı́a.
-S-UP/DOWN
-Cambia el ı́tem bajo el cursor en una marca de tiempo. El cursor puede ser
-en un a~
-no, mes, dı́a, hora, o minuto. Cuando la marca de tiempo contiene un
-rango de tiempo como ‘15:30-16:30', modificando la primera vez dividirá los
-segundos, dividiendo el bloque del momento con el tama~
-no constante. Para
-cambiar el tama~
-no, modifica una segunda vez.
-Cuando Org mode pregunta por una fecha u hora, aceptará cualquier cadena conteniendo
-alguna fecha y/o información, e inteligentemente interpretará la cadena, sacando alguna por
-defecto, para la información no especificada desde la actual fecha y hora. También se puede
-seleccionar una fecha en un calendario pop-up. Ver el manual para más información de
-cómo funciona la fecha/hora.
-
+** DONE 8.2. Creando instantes de tiempo
+Para que Org mode reconozca marcas de tiempo, necesitan estar en el formato especı́fico. Todos los comandos listado debajo producen marcas de tiempo en el formato correcto.
+- =C-c .=. Crea un diálogo para una fecha e inserta la correspondiente marca de tiempo. Ejemplo: <2026-07-12 dom> . Cuando el cursor está en una marca de tiempo existente en el buffer, el comando es usado para modificar esta marca de tiempo en vez de insertar una nueva. Cuando este comando es usado dos veces seguidas, un rango de tiempo es insertado. Ejemplo:<2026-07-12 dom>--<2026-07-19 dom> .Con un prefijo, también añade la hora actual. Ejemplo: =C-u-C-c .= <2026-07-12 dom 19:45>.
+- =C-c !=. Como =C-c .=, pero inserta una marca de tiempo inactiva que no causará una entrada en la agenda. Ejemplo: [2026-07-12 dom].
+- =S-LEFT/RIGHT=. Cambia la fecha en el cursor por un dı́a.
+- =S-UP/DOWN=. Cambia el ı́tem bajo el cursor en una marca de tiempo. El cursor puede ser en un año, mes, dı́a, hora, o minuto. Cuando la marca de tiempo contiene un rango de tiempo como ‘15:30-16:30', modificando la primera vez dividirá los segundos, dividiendo el bloque del momento con el tamañno constante. Para cambiar el tamaño, modifica una segunda vez.
+Cuando Org mode pregunta por una fecha u hora, aceptará cualquier cadena conteniendo alguna fecha y/o información, e inteligentemente interpretará la cadena, sacando alguna por defecto, para la información no especificada desde la actual fecha y hora. También se puede seleccionar una fecha en un calendario pop-up. Ver el manual para más información de cómo funciona la fecha/hora.
 
 ** TODO 8.3. Fecha límite y planificación
-Una marca de tiempo puede ser precedida por palabras clave especiales para facilitar la
-planificación.
-DEADLINE
-Significa: la tarea (normalmente un ı́tem TODO, aunque no necesariamente) se supone que
-finalizará en tal fecha.
-C-c C-d
-
-Inserta la palabra clave ‘DEADLINE' con una marca, en la lı́nea siguiente a la
-cabecera o titular headline.
-
-En la fecha de finalización deadline, la tarea será listada en la agenda. Además la
-agenda para hoy traerá un aviso acerca de la fecha de finalización pasada, empezando orgdeadline-warning-days antes de la fecha y continuando hasta que la entrada es marcada
-como realizada DONE. Un ejemplo:
-​*** TODO escribir artı́culo acerca de la Tierra para la Guı́a.
+Una marca de tiempo puede ser precedida por palabras clave especiales para facilitar la planificación.
+*DEADLINE*
+Significa: la tarea (normalmente un ı́tem TODO, aunque no necesariamente) se supone que finalizará en tal fecha.
+=C-c C-d=-. Inserta la palabra clave ‘DEADLINE' con una marca, en la lı́nea siguiente a la cabecera o titular headline.
+En la fecha de finalización deadline, la tarea será listada en la agenda. Además la agenda para hoy traerá un aviso acerca de la fecha de finalización pasada, empezando orgdeadline-warning-days antes de la fecha y continuando hasta que la entrada es marcada como realizada *DONE*. Un ejemplo:
+​
+#+BEGIN_EXAMPLE
+,*** TODO escribir artı́culo acerca de la Tierra para la Guı́a.
 El editor encargado es [[bbdb:Ford Prefect]]
-DEADLINE: <2004-02-29 Sun>
+DEADLINE: <2026-06-18 jue>
+#+END_EXAMPLE
 
-SCHEDULED
-Significa: estás planificando empezar trabajando en esta tarea en la fecha dada1
-1
-
+*SCHEDULED*
+Significa: estás planificando empezar trabajando en esta tarea en la fecha dada1.
 Esto es bastante diferente, ya que es normalmente comprendido por planificar un encuentro, que es hecho
 en Org-mode insertando una marca de tiempo sin palabra clave.
+=C-c C-s=. Insertar la palabra clave ‘SCHEDULED' con una marca, en la lı́nea después de la cabecera.
 
-Chapter 8: Fechas y horas
+La cabecera será listada bajo la fecha dada2 . Además, un recordatorio de que la fecha introducida en la agenda que ha pasado estará presente en la compilación para hoy, hasta que la entrada es marcada como DONE. Por ejemplo, la tarea automáticamente será reenviada hasta ser completada.
+*** TODO Llamar a Bob para una cita en Año Nuevo
+SCHEDULED: <2027-01-01 vie>
 
-C-c C-s
+Algunas tareas necesitan ser repetidas de nuevo y de nuevo. Org mode ayuda a organizar tales tareas usando un repetidor en una fecha lı́mite DEADLINE, SCHEDULED, o una marca de tiempo en texto plano. En el siguiente ejemplo
+*** TODO Pagar el alquiler                                            :pagar:
+DEADLINE: <2027-07-01 jue +1m>
 
-20
 
-Insertar la palabra clave ‘SCHEDULED' con una marca, en la lı́nea después de la
-cabecera.
-
-La cabecera será listada bajo la fecha dada2 . Además, un recordatorio de que la fecha
-introducida en la agenda que ha pasado estará presente en la compilación para hoy, hasta que
-la entrada es marcada como DONE. Por ejemplo, la tarea automáticamente será reenviada
-hasta ser completada.
-​*** TODO Llamar a Trillian para una cita en A~
-no Nuevo.
-SCHEDULED: <2004-12-25 Sat>
-
-Algunas tareas necesitan ser repetidas de nuevo y de nuevo. Org mode ayuda a organizar
-tales tareas usando un repetidor en una fecha lı́mite DEADLINE, SCHEDULED, o una
-marca de tiempo en texto plano. En el siguiente ejemplo
-​** TODO Pagar el alquiler
-DEADLINE: <2005-10-01 Sat +1m>
 
 el +1m es un repetidor; la interpretación que se pretende es que la tarea tiene una fecha
 lı́mite en <2005-10-01> y repite por sı́ mismo cada mes empezando desde este momento.

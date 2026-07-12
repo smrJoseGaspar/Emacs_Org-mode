@@ -46,7 +46,7 @@ Se permite la copia, distribución y/o modificación de este documento bajo lo
 15. Miscelánea
 
 
-* TODO 1. Introducción [100%]
+* DONE 1. Introducción [100%]
 
 ** DONE 1.1 Prefacio
 - State "DONE"       from "TODO"       [2026-07-11 sáb 02:46]
@@ -526,6 +526,10 @@ Puede también usar las palabras clave :grouptags directamente cuando se config
 Si quieres ignorar las etiquetas grupo temporalmente, cambia el soporte de etiquetas grupo con *org-toggle-tags-groups*, asociado a =C-c C-x q=. Si quieres deshabilitar etiquetas grupos completamente, configura org-group-tags a *nil*.
 
 ** TODO 6.4 Buscando marcas
+:PROPERTIES:
+:ID:       buscando_marcas
+:END:
+
 Una vez que un sistema de etiquetas ha sido configurado, puede ser usado para recoger información dentro de listas especiales.
 - =C-c \=
 - =C-c / m=. Crear un árbol expandido con todas las cabeceras coincidentes con la etiqueta (tag) buscada. Con el prefijo =C-u=, ignora las cabeceras que no son *TODO*.
@@ -539,23 +543,94 @@ La sintáxis completa de las cadenas de búsqueda es rica y permite además c
 + [[https://orgmode.org/manual/Tags.html#Tags][Capı́tulo 6 del manual]].
 + [[https://sachachua.com/wp/2008/01/tagging-in-org-plus-bonus-code-for-timeclocks-and-tags/][Artı́culo de Sacha Chua acerca de etiquetado en Org-mode]].
 
+* TODO 7. Propiedades [100%]
+Las propiedades son pares clave valor asociados con una entrada. Estos se encuentran en un lugar especial con el nombre =PROPERTIES=. Cada propiedad se especifica en una lı́nea simple, con la clave (rodeada por dos puntos) primero, y el valor después de ésta.
+#+BEGIN_EXAMPLE
+,* Colección de CDs
+,** Clásica
+.*** Variaciones de Goldberg
+:PROPERTIES:
+:Tı́tulo: Goldberg Variations
+:Compositor: J.S. Bach
+:Discográfica: Deutsche Grammophon
+:Discos:
+:END:
+#+END_EXAMPLE
 
-* TODO 7. Propiedades
+Se pueden definir los valores permitidos para una propiedad particular ‘:Xyz:' asignando un propiedad ‘:Xyz_ALL:'. Esta propiedad especial es heredada, ası́ si se asigna en una entrada de nivel 1, se aplicará al árbol entero. Cuando los valores permitidos están definidos, asignar la propiedad correspondiente llega a ser fácil y es menos propensa a errores. Para el ejemplo de la colección de CDs, se pueden predefinir las discográficas y el número de discos en una caja como esta:
+#+BEGIN_EXAMPLE
+,* Colección de CDs
+:PROPERTIES:
+:Discos_ALL: 1 2 3 4
+:Discográfica_ALL: “Deutsche Grammophon” Philips EMI
+:END:
+#+END_EXAMPLE
 
-* TODO 8. Fechas y horas [%]
+o globalmente usando org-global-properties, o un fichero amplio como este:
+=#+PROPERTY: Discos_ALL 1 2 3 4=
+- =C-c C-x p=. Asigna una propiedad. Se solicitará un nombre y un valor para la propiedad.
+- =C-c C-c d=. Elimina una propiedad de la entrada actual.
 
-** TODO 8.1. Uno
+Para crear árboles expandidos y listas especiales con selección basada en propiedades, los mismos comandos son usados para buscar marcas (ver [[id:buscando_marcas][*Sección 6.4. Buscando marcas*]]. La sintaxis completa para la búsqueda de cadenas es descrita en [[id:emparejar_marcas_propiedades][*Sección 10.3.3. Emparejar marcas y propiedades*]].
+** DONE Lecturas recomendadas                         :lecturas_recomendadas:
+- [[https://orgmode.org/manual/Properties-and-Columns.html#Properties-and-Columns][Chapı́tulo 7 del manual]].
+- [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][Bastien Guerry's column view tutorial]].
 
-** TODO 8.2. Dos
+* TODO 8. Fechas y horas [20%]
+Para tener una planificación de un proyecto, los ı́tems =TODO= pueden ser etiquetados con una fecha y/o con una hora. La cadena con este formato especial que trae la información de fecha y hora es llamado /timestamp/ en Org mode.
+** DONE 8.1. Instante en el tiempo [100%]
+Una marca de tiempo (timestamp) es una especificación de una fecha (posiblemente con un tiempo o un rango de tiempos) en un formato especial. Como [2026-07-12 dom] o <2026-07-16 jue> o <2025-12-24 mié> o <2026-07-14 mar 12:30> o ‘<2003-09-16 Jue 12:00-12:30>'.
+Una marca de tiempo puede aparecer en cualquier lugar, titular o cuerpo de una entrada del árbol Org. Su presencia causa que la entrada sea mostrada en una fecha especı́fica de la agenda (vea [[id:agenda_semanal_diaria][*Sección 10.3.1. Agenda semanal/diaria*]]). Distinguimos:
+*** DONE *Plain timestamp; Event; Appointment*
+Una marca de tiempo simple solo asigna una fecha/hora a un ı́tem. Esto es solo como escribir una cita o evento en una agenda en papel.
+#+BEGIN_EXAMPLE
+,* Ver pelis con Pedro
+<2026-07-19 dom 19:15>
+,* Discusión acerca del cambio climático
+<2026-07-14 mar 12:30-13:30>
+#+END_EXAMPLE
 
-** TODO 8.3. Tres
+*** DONE *Timestamp with repeater interval*
+Una marca de tiempo puede contener un /intervalo de repetición/, indicando que se aplica no solo en la fecha dada, pero de nuevo y de nuevo después de un cierto intervalo de N dı́as (d), semanas /weeks/ (w), meses (m), o años /years/ (y). Lo siguiente muestra en la agenda cada Lunes:
+#+BEGIN_EXAMPLE
+,* Recoger a Marina en el colegio
+<2026-07-19 dom 12:30 +1w>
+#+END_EXAMPLE
+*** DONE *Diary-style sexp entries*
+Para especificaciones de fecha más complejas, Org mode da soporte usando las entradas /diarias sexp/ implementadas en el paquete Emacs *calendar/diary*. Por ejemplo:
+#+BEGIN_EXAMPLE
+,* Encuentro misionero los segundos jueves de cada mes
+<%%(diary-float t 4 2)>
+#+END_EXAMPLE
+
+*** DONE *Time/Date range*
+Dos marcas de tiempo conectadas por ‘--' denotan un rango.
+#+BEGIN_EXAMPLE
+,** Jornadas e-computing 2026
+<2026-07-03 vie>--<2026-07-05 dom>
+#+END_EXAMPLE
+
+*** DONE *Inactive timestamp*
+Como una marca de tiempo timestamp, pero con paréntesis cuadrados en vez de angulares. Estas marcas de tiempo son inactivas en el sentido de que no aparecen como entrada en la agenda.
+#+BEGIN_EXAMPLE
+,* Antón llego tarde por última vez
+[2026-06-29 lun]
+#+END_EXAMPLE
+
+** TODO 8.2. Creando instantes de tiempo
+
+** TODO 8.3. Fecha límite y planificación
 
 ** TODO 8.4. Estableciendo tiempo de trabajo
 :PROPERTIES:
 :ID:    estableciendo_tiempo_trabajo
 :END:
 
-Esta es una sección a implementar con un enlace
+Esta es una sección a implementar con un enlace.
+
+** TODO **Lecturas recomendadas: **                   :lecturas_recomendadas:
+- Una
+- Dos
 
 * TODO 9. Capturar - Rellenar - Archivar [0%]
 ** TODO 9.1. Uno
@@ -563,7 +638,6 @@ Esta es una sección a implementar con un enlace
 :PROPERTIES:
 :ID:       rellenar_copiar
 :END:
-
 
 * TODO 10. Vistas de la Agenda [16%]
 :PROPERTIES:
@@ -587,7 +661,6 @@ Esta es una sección a implementar con un enlace
 - [[https://orgmode.org/manual/Agenda-Views.html][Capı́tulo 11 del manual]].
 - [[https://orgmode.org/worg/org-tutorials/org-custom-agenda-commands.html][El tutorial de Mat Lundin acerca de comandos personalizados de agenda]].
 
-
 * TODO 11. Marcas para enriquecer la exportación
 
 * TODO 12. Exportando [0%]
@@ -601,7 +674,6 @@ Esta es una sección a implementar con un enlace
 :PROPERTIES:
 :ID:       html_export
 :END:
-
 
 
 * TODO 13. Publicación

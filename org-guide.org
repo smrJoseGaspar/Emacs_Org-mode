@@ -17,100 +17,11 @@
 
 6 Etiquetas
 7 Propiedades
-Las propiedades son pares clave valor asociados con una entrada. Estos se encuentran en
-un lugar especial con el nombre PROPERTIES. Cada propiedad se especifica en una lı́nea
-simple, con la clave (rodeada por dos puntos) primero, y el valor después de ésta.
-​* Colección de CDs
-​** Clásica
-​*** Variaciones de Goldberg
-:PROPERTIES:
-:Tı́tulo:
-Goldberg Variations
-:Compositor: J.S. Bach
-:Discográfica: Deutsche Grammophon
-:Discos:
-1
-:END:
-
-Se pueden definir los valores permitidos para una propiedad particular ‘:Xyz:' asignando
-un propiedad ‘:Xyz_ALL:'. Esta propiedad especial es heredada, ası́ si se asigna en una
-entrada de nivel 1, se aplicará al árbol entero. Cuando los valores permitidos están definidos,
-asignar la propiedad correspondiente llega a ser fácil y es menos propensa a errores. Para el
-ejemplo de la colección de CDs, se pueden predefinir las discográficas y el número de discos
-en una caja como esta:
-​* Colección de CDs
-:PROPERTIES:
-:Discos_ALL: 1 2 3 4
-:Discográfica_ALL: “Deutsche Grammophon” Philips EMI
-:END:
-
-o globalmente usando org-global-properties, o un fichero amplio como este:
-​#+PROPERTY: Discos_ALL 1 2 3 4
-
-C-c C-x p Asigna una propiedad. Se solicitará un nombre y un valor para la propiedad.
-C-c C-c d Elimina una propiedad de la entrada actual.
-Para crear árboles expandidos y listas especiales con selección basada en propiedades,
-los mismos comandos son usados para buscar marcas (see Section 6.4 [Buscando marcas],
-page 15). La sintaxis completa para la búsqueda de cadenas es descrita en Section 10.3.3
-[Emparejar marcas y propiedades], page 26.
-Further reading
-Chapı́tulo 7 del manual
-Bastien Guerry's column view tutorial
-
-Chapter 8: Fechas y horas
-
-18
-
 8 Fechas y horas
-Para tener una planificación de un proyecto, los ı́tems TODO pueden ser etiquetados con
-una fecha y/o con una hora. La cadena con este formato especial que trae la información
-de fecha y hora es llamado timestamp en Org mode.
 
 8.1 Instante en el tiempo
-Una marca de tiempo (timestamp) es una especificación de una fecha (posiblemente con
-un tiempo o un rango de tiempos) en un formato especial. Como ‘<2003-09-16 Jue>'
-o ‘<2003-09-16 Jue 09:39>' o ‘<2003-09-16 Jue 12:00-12:30>'. Una marca de tiempo
-puede aparecer en cualquier lugar, titular o cuerpo de una entrada del árbol Org. Su
-presencia causa que la entrada sea mostrada en una fecha especı́fica de la agenda (see
-Section 10.3.1 [Agenda semanal/diaria], page 26). Distinguimos:
-Plain timestamp; Event; Appointment
-Una marca de tiempo simple solo asigna una fecha/hora a un ı́tem. Esto es solo como
-escribir una cita o evento en una agenda en papel.
-​* Ver pelis con Pedro
-<2006-11-01 Wed 19:15>
-​* Discusión acerca del cambio climático
-<2006-11-02 Thu 20:00-22:00>
-
-Timestamp with repeater interval
-Una marca de tiempo puede contener un intervalo de repetición, indicando que se aplica no
-solo en la fecha dada, pero de nuevo y de nuevo después de un cierto intervalo de N dı́as
-(d), semanas weeks (w), meses (m), o a~
-nos years (y). Lo siguiente muestra en la agenda
-cada Miércoles:
-​* Recoger a Samuel en el colegio
-<2007-05-16 Wed 12:30 +1w>
-
-Diary-style sexp entries
-Para especificaciones de fecha más complejas, Org mode da soporte usando las entradas
-diarias sexp implementadas en el paquete Emacs calendar/diary. Por ejemplo:
-​* El encuentro nerd los segundos jueves del mes
-<%%(diary-float t 4 2)>
-
-Time/Date range
-Dos marcas de tiempo conectadas por ‘--' denotan un rango.
-​** Encuentro en Amsterdam
-<2004-08-23 Mon>--<2004-08-26 Thu>
-
-Inactive timestamp
-Como una marca de tiempo timestamp, pero con paréntesis cuadrados en vez de angulares.
-Estas marcas de tiempo son inactivas en el sentido de que no aparecen como entrada en la
-agenda.
-​* Julia llegó tarde por quinta vez
-[2006-11-01 Wed]
-
-Chapter 8: Fechas y horas
-
-19
+ ‘<2003-09-16 Jue>'
+o ‘<2003-09-16 Jue 09:39>' 
 
 8.2 Creando instantes de tiempo
 Para que Org mode reconozca marcas de tiempo, necesitan estar en el formato especı́fico.

@@ -543,7 +543,7 @@ La sintáxis completa de las cadenas de búsqueda es rica y permite además c
 + [[https://orgmode.org/manual/Tags.html#Tags][Capı́tulo 6 del manual]].
 + [[https://sachachua.com/wp/2008/01/tagging-in-org-plus-bonus-code-for-timeclocks-and-tags/][Artı́culo de Sacha Chua acerca de etiquetado en Org-mode]].
 
-* TODO 7. Propiedades [100%]
+* DONE 7. Propiedades [100%]
 Las propiedades son pares clave valor asociados con una entrada. Estos se encuentran en un lugar especial con el nombre =PROPERTIES=. Cada propiedad se especifica en una lı́nea simple, con la clave (rodeada por dos puntos) primero, y el valor después de ésta.
 #+BEGIN_EXAMPLE
 ,* Colección de CDs

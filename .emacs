@@ -1,3 +1,13 @@
+;; Iniicializamos
+
+(require 'package)
+
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu"   . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+
 ;; Python Source Code Blocks in Org Mode
 ;; https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html
 (require 'ob-python)
@@ -68,22 +78,24 @@
   :init
   (nerd-icons-completion-mode))
 
+;; --- ERROR: consult ---
 ;; `consult` en Emacs es un paquete que añade **comandos de búsqueda y navegación** usando la función estándar de Emacs `completing-read`,
 ;; generalmente con resultados interactivos (incluyendo búsquedas como `consult-line`, `consult-grep`/`consult-ripgrep`, y cambio avanzado de buffers con `consult-buffer`).
 
-(use-package consult
-  :init
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)))
+;; (use-package consult
+;;  :init
+;;  (consult-customize
+;;   consult-theme :preview-key '(:debounce 0.2 any)))
 
-(use-package consult-projectile)
+;; (use-package consult-projectile)
 
-(use-package consult-dir
-  :bind (("C-x C-d" . consult-dir)
-         :map minibuffer-local-completion-map
-         ("C-x C-d" . consult-dir)
-         ("C-x C-j" . consult-dir-jump-file)))
+;; (use-package consult-dir
+;;   :bind (("C-x C-d" . consult-dir)
+;;         :map minibuffer-local-completion-map
+;;         ("C-x C-d" . consult-dir)
+;;         ("C-x C-j" . consult-dir-jump-file)))
 
+;; ---- fin ERROR: consult ---
 ;; ---- Fin copia pega: Vertico and friends ----
 
 ;; Emacs-reader
@@ -104,20 +116,50 @@
 ;;                           (set-window-margins (selected-window) margin margin)))))
 ;; --- Fin comentario ERROR al cargar ---
 
+;; --- ERROR al cargar org-download
+;; Org-download
+;; Permite descargar, arrastras y soltar imagenes fácilmente dentro de un documento .org
+;; Org-download (imágenes junto al .org, en ./images)
+(use-package org-download
+  :ensure t
+  :after org
+  :init
+  (setq org-download-method 'directory)
+  (setq org-download-image-dir "images")   ;; <- relativo al directorio del .org (buffer)
+  (setq org-download-heading-lvl nil)
+  (setq org-download-timestamp "%Y%m%d-%H%M%S_")
+  :config
+  (advice-add
+   'org-download--ensure-directory
+   :around
+   (lambda (orig-fn &rest args)
+     (let ((dir (expand-file-name org-download-image-dir
+                                   (or (file-name-directory (or (buffer-file-name) default-directory))
+                                       default-directory))))
+       (unless (file-directory-p dir)
+         (make-directory dir t))
+       (let ((org-download-image-dir dir))
+         (apply orig-fn args))))))
+
+
+
+;; ----ERROR Magit
 ;; Magit
 ;; `magit` en Emacs es un paquete que te da una **interfaz (UI) tipo “Git porcelain”) para Git**: desde Emacs puedes ver el estado del repositorio, preparar/cambiar cambios (staging/unstaging),
 ;; hacer commits, gestionar ramas, y operaciones como pull/push, merges, rebases, etc., ejecutando comandos de Git por detrás.
 
-(use-package magit)
+;; (use-package magit)
 
-(use-package forge
-  :after magit)
+;; (use-package forge
+;;  :after magit)
 
-(use-package magit-todos
-  :after magit
-  :config
-  (setq magit-todos-branch-list nil)
-  (magit-todos-mode))
+;; (use-package magit-todos
+;;  :after magit
+;;  :config
+;;  (setq magit-todos-branch-list nil)
+;;  (magit-todos-mode))
+
+;; --- Fin ERROR magit ---
 
 ;; projectile
 ;; `projectile` en Emacs es un paquete de **gestión y navegación por proyectos**: detecta la carpeta raíz del proyecto y te permite hacer cosas “a nivel de proyecto”

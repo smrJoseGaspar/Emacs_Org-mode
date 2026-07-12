@@ -1,0 +1,24 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/josegaspar/GitHubProjects/smrJoseGaspar/Emacs_Org-mode/README.org
+
+
+* DONE 9.3 Archivando
+:PROPERTIES:
+:ARCHIVE_TIME: 2026-07-13 lun 00:03
+:ARCHIVE_FILE: ~/GitHubProjects/smrJoseGaspar/Emacs_Org-mode/README.org
+:ARCHIVE_OLPATH: 9. Capturar - Rellenar - Archivar
+:ARCHIVE_CATEGORY: README
+:ARCHIVE_TODO: DONE
+:END:
+
+Cuando un proyecto representó por un (sub)árbol está finalizado, tu puedes querer mover el árbol fuera del camino y páralo desde la contribución a la agenda. El archivo es importante para guardar tus ficheros de trabajo búsquedas como la construcción de vistas de agenda rápidas. La acción de archivación más común es mover un árbol de proyecto a otro fichero, el fichero archivo.
+- =C-c C-x C-a=. Archivar la actual entrada usando el comando especificado en la variable *org-archive-default-command*.
+- =C-c C-x C-s= o abreviada =C-c $=. Archiva el subárbol empezando en la posición del cursor a la localización dada por *org-archive-location*.
+
+La localización del archivo por defecto es un fichero en el mismo directorio como el actual fichero, con el nombre derivado por el sufijo **‘_archive'** al actual nombre de fichero. Para información y ejemplos de cómo cambiar esto, ver la cadena de documentación de la variable *org-archive-location*. Hay también una opción de buffer para la configuración esta variable, por ejemplo
+#+begin_example​
+,#+ARCHIVE: %s_done::
+#+end_example
+

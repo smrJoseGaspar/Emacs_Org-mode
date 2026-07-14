@@ -1,0 +1,45 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil expand-links:t f:t
+#+options: inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: Guia para el uso de citas bibliograficas en Org-mode
+#+date: \today
+#+author: José Gaspar Sánchez Garcia
+#+email: jg.sanchezgarcia@edu.gva.es
+#+language: es
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.2 (Org mode 9.7.11)
+#+bibliography: refs.bib
+#+cite_export: biblatex
+#+latex_class: article
+#+latex_class_options:
+#+latex_header:
+#+latex_header_extra:
+#+description: Aprendiendo a introducir citas y referencias en un documento
+#+keywords: citas, referencias
+#+subtitle: Citas y referencias bibliográficas
+#+latex_footnote_command: \footnote{%s%s}
+#+latex_engraved_theme:
+#+latex_compiler: pdflatex
+
+* Ejemplo de un documento con citas
+Este es un documento que incluye citas en un documento.
+Esto es una evidencia. Esto es una cita [cite:@smith2020]
+Esto es otra cita [cite:@austen_pride_prejudice]
+
+Esta cita va ha ser introducida con citar (1813) Pride and Prejudice, T. Egerton.
+
+Otra cita [cite:@smith2020]
+
+Informes técnicos. [cite:@gaspar2026]
+
+
+* Referencias
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+#+print_bibliography:
+
